@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUSBENG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="school.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="#home" class="logo">
+        <span class="logo-mark">PB</span>
+        <span class="logo-text">PUSBENG</span>
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-slider">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1600&q=80');"></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-panel">
+          <p class="hero-kicker">Inspiring Excellence, Building Character</p>
+          <h1>Welcome to PUSBENG</h1>
+          <p class="hero-text">
+            A modern learning community where academic achievement, creativity, and leadership grow together.
+          </p>
+          <div class="hero-actions">
+            <a href="#profile" class="btn btn-primary">Explore Our School</a>
+            <a href="#contact" class="btn btn-secondary">Contact Us</a>
+          </div>
+          <div class="hero-dots" aria-label="Hero slider navigation">
+            <button class="hero-dot active" type="button" aria-label="Show slide 1"></button>
+            <button class="hero-dot" type="button" aria-label="Show slide 2"></button>
+            <button class="hero-dot" type="button" aria-label="Show slide 3"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="profile">
+      <div class="section-heading">
+        <p class="section-tag">Profile</p>
+        <h2>About Our School</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <p>
+            PUSBENG High School is committed to providing a safe, inclusive, and forward-thinking educational
+            environment for every student. We combine strong academic foundations with character development,
+            technology integration, and meaningful extracurricular opportunities.
+          </p>
+          <p>
+            With dedicated teachers, supportive parents, and enthusiastic learners, our school continues to grow as
+            a center of excellence that prepares students for university, careers, and responsible citizenship.
+          </p>
+        </div>
+
+        <div class="stats-card">
+          <div class="stat-item">
+            <strong>1,250+</strong>
+            <span>Students</span>
+          </div>
+          <div class="stat-item">
+            <strong>75+</strong>
+            <span>Teachers & Staff</span>
+          </div>
+          <div class="stat-item">
+            <strong>25+</strong>
+            <span>Programs & Clubs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section vision-mission">
+      <div class="section-heading">
+        <p class="section-tag">Guiding Principles</p>
+        <h2>Vision & Mission</h2>
+      </div>
+
+      <div class="vision-mission-grid">
+        <article class="info-panel">
+          <h3>Our Vision</h3>
+          <p>
+            To become a leading high school that nurtures knowledgeable, creative, and ethical students ready to
+            contribute positively to society.
+          </p>
+        </article>
+
+        <article class="info-panel">
+          <h3>Our Mission</h3>
+          <ul>
+            <li>Deliver high-quality education through innovative learning methods.</li>
+            <li>Develop student character based on integrity, discipline, and empathy.</li>
+            <li>Encourage achievement in academics, sports, arts, and leadership.</li>
+            <li>Build strong partnerships between school, family, and community.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section news" id="news">
+      <div class="section-heading">
+        <p class="section-tag">Latest Update</p>
+        <h2>News & Articles</h2>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80" alt="Students celebrating academic achievement">
+          <div class="news-content">
+            <span class="news-date">April 10, 2026</span>
+            <h3>Students Win Regional Science Innovation Award</h3>
+            <p>Our science club earned top honors for a sustainability project that impressed judges across the region.</p>
+            <a href="#news" class="text-link">Read more</a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80" alt="Teacher speaking in a school seminar">
+          <div class="news-content">
+            <span class="news-date">March 28, 2026</span>
+            <h3>Leadership Seminar Inspires Future Changemakers</h3>
+            <p>Students joined an interactive seminar focused on confidence, teamwork, and community leadership.</p>
+            <a href="#news" class="text-link">Read more</a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80" alt="School sports event on the field">
+          <div class="news-content">
+            <span class="news-date">March 12, 2026</span>
+            <h3>Annual Sports Week Builds Team Spirit</h3>
+            <p>A week of energetic competitions brought students together through sportsmanship and school pride.</p>
+            <a href="#news" class="text-link">Read more</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section gallery" id="gallery">
+      <div class="section-heading">
+        <p class="section-tag">Campus Life</p>
+        <h2>Gallery</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=900&q=80" alt="Students studying together in class">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Students collaborating on a project">
+        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=900&q=80" alt="School building exterior">
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80" alt="Students in discussion with teacher">
+        <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=80" alt="Library study area">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="School presentation and event">
+      </div>
+    </section>
+    <section class="section contact-section" id="contact">
+      <div class="section-heading">
+        <p class="section-tag">Get In Touch</p>
+        <h2>Contact & Location</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>PUSBENG</h3>
+          <p>Jl. Aria Putra No.9, Ciputat, Kec. Ciputat, Kota Tangerang Selatan, Banten 15411</p>
+          <p>Email: info@blueridgehs.edu</p>
+          <p>Phone: +62 21 555 1234</p>
+          <p>Office Hours: Mon - Fri, 07:00 - 16:00</p>
+          <a class="whatsapp-button" href="https://wa.me/62215551234" target="_blank" rel="noopener noreferrer">
+            Contact via WhatsApp
+          </a>
+        </div>
+
+        <div class="map-card" aria-label="School location map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.6158540793913!2d106.74309797499107!3d-6.31408849367525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69efe8580ae2cb%3A0x96b2855445f1d25b!2sPuspita%20Bangsa%20Vocational%20High%20School!5e0!3m2!1sid!2sid!4v1776712929529!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="PUSBENG location map">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h3>PUSBENG</h3>
+        <p>Academic excellence, character, and community.</p>
+      </div>
+      <div>
+        <p>Email: info@blueridgehs.edu</p>
+        <p>Phone: +62 21 555 1234</p>
+      </div>
+      <div>
+        <p>123 Education Avenue, Jakarta</p>
+        <p>&copy; 2026 PUSBENG. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
