@@ -48,7 +48,7 @@ function buildFormData(data) {
   const formData = new FormData();
 
   Object.entries(data).forEach(([key, value]) => {
-    formData.append(key, value);
+    formData.append(key, value ?? "");
   });
 
   return formData;
@@ -245,7 +245,7 @@ function initPpdbForm() {
       namaLengkap: form.elements.namaLengkap.value.trim(),
       nisn: form.elements.nisn.value.trim(),
       tempatLahir: form.elements.tempatLahir.value.trim(),
-      tanggalLahir: formatDate(form.elements.tanggalLahir.value),
+      tanggalLahir: form.elements.tanggalLahir.value,
       jenisKelamin: form.elements.jenisKelamin.value,
       alamat: form.elements.alamat.value.trim(),
       noHp: form.elements.noHp.value.trim(),
@@ -264,7 +264,7 @@ function initPpdbForm() {
       { label: "Nama Lengkap", value: studentData.namaLengkap },
       { label: "NISN", value: studentData.nisn },
       { label: "Tempat Lahir", value: studentData.tempatLahir },
-      { label: "Tanggal Lahir", value: studentData.tanggalLahir },
+      { label: "Tanggal Lahir", value: formatDate(studentData.tanggalLahir) },
       { label: "Jenis Kelamin", value: studentData.jenisKelamin },
       { label: "Alamat", value: studentData.alamat },
       { label: "No HP", value: studentData.noHp },
