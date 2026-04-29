@@ -17,6 +17,8 @@ async function submitToServer(data) {
   params.append("email", data.email || "");
   params.append("pilihanJurusan", data.pilihanJurusan || "");
 
+  console.log([...params.entries()]);
+
   await fetch(PPDB_ENDPOINT, {
     method: "POST",
     mode: "no-cors",
