@@ -31,7 +31,6 @@ html {
 }
 
 body {
-  font-family: "Manrope", sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(47, 133, 255, 0.16), transparent 28%),
@@ -254,7 +253,6 @@ ul {
 .page-hero h1 {
   max-width: 700px;
   margin: 1rem 0;
-  font-family: "Playfair Display", serif;
   font-size: clamp(2.8rem, 6vw, 5.4rem);
   line-height: 1.05;
 }

@@ -6,207 +6,8 @@
   <title>PUSBENG | Pembayaran</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .payment-page {
-      font-size: 16px;
-      line-height: 1.75;
-    }
-
-    .payment-page .section {
-      width: min(1100px, calc(100% - 2rem));
-      padding-top: clamp(2.5rem, 5vw, 4rem);
-      padding-bottom: clamp(2.5rem, 5vw, 4rem);
-    }
-
-    .payment-page .section + .section {
-      margin-top: 0.5rem;
-    }
-
-    .payment-page .section-heading {
-      margin-bottom: 2rem;
-    }
-
-    .payment-page .section-heading h2 {
-      font-size: clamp(2.15rem, 4vw, 3.15rem);
-      font-weight: 800;
-      line-height: 1.15;
-    }
-
-    .payment-page .section-heading p,
-    .payment-page .cta-band p,
-    .payment-page .feature-card p,
-    .payment-page .timeline-card p,
-    .payment-page .info-panel p,
-    .payment-page .field-note,
-    .payment-page .form-helper {
-      font-size: 1rem;
-    }
-
-    .payment-page .cta-band {
-      padding: clamp(1.35rem, 3vw, 2rem);
-      border-radius: 24px;
-      border: 1px solid rgba(12, 77, 162, 0.12);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(234, 243, 255, 0.96));
-      box-shadow: 0 20px 40px rgba(8, 51, 111, 0.1);
-    }
-
-    .payment-toggle-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .payment-toggle-btn {
-      min-width: 190px;
-      padding: 12px 20px;
-      border-radius: 8px;
-      border: 0;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
-    }
-
-    .payment-toggle-btn:hover,
-    .payment-toggle-btn:focus-visible {
-      transform: translateY(-2px);
-      filter: brightness(1.03);
-      box-shadow: 0 16px 28px rgba(8, 51, 111, 0.15);
-    }
-
-    .payment-toggle-btn.active {
-      color: var(--white);
-      background: linear-gradient(135deg, var(--accent), var(--primary));
-      box-shadow: 0 18px 28px rgba(6, 43, 92, 0.24);
-    }
-
-    .payment-form-panel[hidden] {
-      display: none;
-    }
-
-    .payment-form-panel {
-      margin-top: 0.75rem;
-    }
-
-    .payment-page .ppdb-form-card {
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 18px 36px rgba(8, 51, 111, 0.1);
-      border: 1px solid rgba(12, 77, 162, 0.1);
-      padding: 20px;
-    }
-
-    .payment-page .ppdb-form-card h3 {
-      font-size: 1.55rem;
-      font-weight: 800;
-      margin-bottom: 0.65rem;
-    }
-
-    .payment-page .vision-mission-grid,
-    .payment-page .feature-grid,
-    .payment-page .timeline-grid {
-      gap: 1.5rem;
-    }
-
-    .payment-page .feature-card,
-    .payment-page .timeline-card,
-    .payment-page .info-panel {
-      padding: 1.6rem;
-      border-radius: 18px;
-    }
-
-    .payment-page .feature-card h3,
-    .payment-page .timeline-card h3,
-    .payment-page .info-panel h3 {
-      font-size: 1.35rem;
-      font-weight: 800;
-    }
-
-    .payment-page .form-grid {
-      gap: 1.2rem 1.4rem;
-    }
-
-    .payment-page .form-field {
-      gap: 0.55rem;
-    }
-
-    .payment-page .form-label {
-      font-size: 0.98rem;
-      font-weight: 800;
-    }
-
-    .payment-page .form-input {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: 1px solid rgba(12, 77, 162, 0.16);
-      background: #ffffff;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .payment-page .form-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(47, 133, 255, 0.14);
-      outline: none;
-    }
-
-    .payment-page .submit-btn {
-      border-radius: 8px;
-      padding: 12px 20px;
-    }
-
-    .payment-page .timeline-step {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .payment-page .section {
-        width: min(100%, calc(100% - 1.25rem));
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-      }
-
-      .payment-page .section-heading {
-        margin-bottom: 1.35rem;
-      }
-
-      .payment-page .section-heading h2 {
-        font-size: 1.8rem;
-      }
-
-      .payment-page .cta-band,
-      .payment-page .ppdb-form-card,
-      .payment-page .feature-card,
-      .payment-page .timeline-card,
-      .payment-page .info-panel {
-        padding: 1.15rem;
-      }
-
-      .payment-toggle-group {
-        flex-direction: column;
-        gap: 0.85rem;
-      }
-
-      .payment-toggle-btn {
-        width: 100%;
-        min-width: 0;
-        font-size: 0.96rem;
-      }
-
-      .payment-page .form-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .payment-page .submit-btn {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/css/global.css">
 </head>
 <body class="payment-page" data-page="pembayaran" data-root="..">
   <div data-include="navbar"></div>
@@ -227,8 +28,8 @@
 
     <section class="section news">
       <div class="section-heading">
-        <p class="section-tag">Pilih Jenis Pembayaran</p>
-        <h2>Tentukan pembayaran yang ingin Anda kirim</h2>
+        <p class="section-tag section-label">Pilih Jenis Pembayaran</p>
+        <h2 class="section-title">Tentukan pembayaran yang ingin Anda kirim</h2>
       </div>
 
       <div class="cta-band">
@@ -248,12 +49,12 @@
 
     <section class="section vision-mission">
       <div class="section-heading">
-        <p class="section-tag">Form Pembayaran</p>
-        <h2>Kirim data pembayaran secara langsung</h2>
+        <p class="section-tag section-label">Form Pembayaran</p>
+        <h2 class="section-title">Kirim data pembayaran secara langsung</h2>
       </div>
 
       <div class="payment-form-panel" id="ppdb-payment-panel">
-        <article class="ppdb-form-card">
+        <article class="ppdb-form-card card">
           <h3>Pembayaran PPDB</h3>
           <p class="field-note">Gunakan formulir ini untuk pembayaran biaya pendaftaran awal sebesar Rp200.000.</p>
 
@@ -298,7 +99,7 @@
       </div>
 
       <div class="payment-form-panel" id="spp-payment-panel" hidden>
-        <article class="ppdb-form-card">
+        <article class="ppdb-form-card card">
           <h3>Pembayaran SPP</h3>
           <p class="field-note">Isi pembayaran bulanan siswa sesuai bulan tagihan dan nominal yang akan dibayarkan.</p>
 
@@ -363,20 +164,20 @@
 
     <section class="section about">
       <div class="section-heading">
-        <p class="section-tag">Metode Pembayaran</p>
-        <h2>Pilih cara pembayaran yang paling nyaman</h2>
+        <p class="section-tag section-label">Metode Pembayaran</p>
+        <h2 class="section-title">Pilih cara pembayaran yang paling nyaman</h2>
       </div>
 
       <div class="feature-grid">
-        <article class="feature-card">
+        <article class="feature-card card">
           <h3>Transfer Bank</h3>
           <p>Pembayaran dapat dilakukan melalui rekening resmi sekolah dengan mencantumkan nama siswa pada keterangan transfer.</p>
         </article>
-        <article class="feature-card">
+        <article class="feature-card card">
           <h3>Virtual Account</h3>
           <p>Untuk transaksi yang lebih cepat, sekolah dapat menyiapkan nomor virtual account sesuai kebutuhan administrasi.</p>
         </article>
-        <article class="feature-card">
+        <article class="feature-card card">
           <h3>Pembayaran Langsung</h3>
           <p>Orang tua juga dapat melakukan pembayaran langsung melalui loket administrasi pada jam operasional sekolah.</p>
         </article>
@@ -385,27 +186,27 @@
 
     <section class="section vision-mission">
       <div class="section-heading">
-        <p class="section-tag">Alur Administrasi</p>
-        <h2>Langkah pembayaran dan konfirmasi</h2>
+        <p class="section-tag section-label">Alur Administrasi</p>
+        <h2 class="section-title">Langkah pembayaran dan konfirmasi</h2>
       </div>
 
       <div class="timeline-grid">
-        <article class="timeline-card">
+        <article class="timeline-card card">
           <span class="timeline-step">01</span>
           <h3>Lakukan pembayaran</h3>
           <p>Pilih metode pembayaran yang tersedia sesuai tagihan atau kebutuhan administrasi.</p>
         </article>
-        <article class="timeline-card">
+        <article class="timeline-card card">
           <span class="timeline-step">02</span>
           <h3>Simpan bukti transaksi</h3>
           <p>Pastikan bukti transfer atau bukti pembayaran tersimpan dengan jelas untuk proses verifikasi.</p>
         </article>
-        <article class="timeline-card">
+        <article class="timeline-card card">
           <span class="timeline-step">03</span>
           <h3>Kirim konfirmasi</h3>
           <p>Kirim bukti pembayaran ke admin sekolah melalui WhatsApp atau layanan yang disediakan.</p>
         </article>
-        <article class="timeline-card">
+        <article class="timeline-card card">
           <span class="timeline-step">04</span>
           <h3>Verifikasi selesai</h3>
           <p>Tim administrasi akan memeriksa transaksi dan memberikan konfirmasi setelah data sesuai.</p>
@@ -415,12 +216,12 @@
 
     <section class="section news">
       <div class="section-heading">
-        <p class="section-tag">Informasi Tambahan</p>
-        <h2>Hal yang perlu diperhatikan</h2>
+        <p class="section-tag section-label">Informasi Tambahan</p>
+        <h2 class="section-title">Hal yang perlu diperhatikan</h2>
       </div>
 
       <div class="vision-mission-grid">
-        <article class="info-panel">
+        <article class="info-panel card">
           <h3>Komponen Pembayaran</h3>
           <ul>
             <li>Biaya daftar ulang dan administrasi awal.</li>
@@ -429,7 +230,7 @@
           </ul>
         </article>
 
-        <article class="info-panel">
+        <article class="info-panel card">
           <h3>Bantuan Keuangan</h3>
           <ul>
             <li>Konfirmasi pembayaran dapat dilakukan pada jam kerja sekolah.</li>
