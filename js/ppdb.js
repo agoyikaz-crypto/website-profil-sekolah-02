@@ -7,43 +7,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function submitToServer(data) {
   const payload = buildServerPayload(data);
+  const formData = buildFormData(payload);
   console.log("Sending data:", payload);
 
-  let response;
-
   try {
-    response = await fetch(PPDB_ENDPOINT, {
+    const response = await fetch(PPDB_ENDPOINT, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
+      mode: "no-cors",
+      body: formData
     });
+
+    const result = {
+      status: "submitted",
+      type: response.type
+    };
+
+    console.log("Response:", result);
+    return result;
   } catch (error) {
     console.error("Fetch error:", error);
     throw error;
   }
-
-  const result = await parseServerResponse(response);
-  console.log("Response:", result);
-
-  if (!response.ok) {
-    const statusError = new Error(`Server mengembalikan status ${response.status}.`);
-    console.error("HTTP error response:", {
-      status: response.status,
-      statusText: response.statusText,
-      result
-    });
-    throw statusError;
-  }
-
-  if (result && result.status && result.status !== "success") {
-    const serverError = new Error(result.message || "Server menolak data pendaftaran.");
-    console.error("Server error response:", result);
-    throw serverError;
-  }
-
-  return result;
 }
 
 function buildServerPayload(data) {
@@ -60,18 +44,14 @@ function buildServerPayload(data) {
   };
 }
 
-async function parseServerResponse(response) {
-  const responseText = await response.text();
+function buildFormData(data) {
+  const formData = new FormData();
 
-  if (!responseText) {
-    return null;
-  }
+  Object.entries(data).forEach(([key, value]) => {
+    formData.append(key, value);
+  });
 
-  try {
-    return JSON.parse(responseText);
-  } catch (error) {
-    return { raw: responseText };
-  }
+  return formData;
 }
 
 function saveBackupToLocalStorage(studentData) {
