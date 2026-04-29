@@ -6,21 +6,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function submitToServer(data) {
-  const formData = new FormData();
-  formData.append("namaLengkap", data.namaLengkap || "");
-  formData.append("nisn", data.nisn || "");
-  formData.append("tempatLahir", data.tempatLahir || "");
-  formData.append("tanggalLahir", data.tanggalLahir || "");
-  formData.append("jenisKelamin", data.jenisKelamin || "");
-  formData.append("alamat", data.alamat || "");
-  formData.append("noHp", data.noHp || "");
-  formData.append("email", data.email || "");
-  formData.append("pilihanJurusan", data.pilihanJurusan || "");
+  const params = new URLSearchParams();
+  params.append("namaLengkap", data.namaLengkap || "");
+  params.append("nisn", data.nisn || "");
+  params.append("tempatLahir", data.tempatLahir || "");
+  params.append("tanggalLahir", data.tanggalLahir || "");
+  params.append("jenisKelamin", data.jenisKelamin || "");
+  params.append("alamat", data.alamat || "");
+  params.append("noHp", data.noHp || "");
+  params.append("email", data.email || "");
+  params.append("pilihanJurusan", data.pilihanJurusan || "");
 
   await fetch(PPDB_ENDPOINT, {
     method: "POST",
     mode: "no-cors",
-    body: formData
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: params
   });
 
   return { status: "success" };
