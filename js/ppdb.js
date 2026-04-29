@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function submitToServer(data) {
   const params = new URLSearchParams();
+
   params.append("namaLengkap", data.namaLengkap || "");
   params.append("nisn", data.nisn || "");
   params.append("tempatLahir", data.tempatLahir || "");
@@ -17,13 +18,15 @@ async function submitToServer(data) {
   params.append("email", data.email || "");
   params.append("pilihanJurusan", data.pilihanJurusan || "");
 
-  console.log("DEBUG PARAMS:", [...params.entries()]);
+  console.log("FINAL PARAMS:", params.toString());
 
-  const url = PPDB_ENDPOINT + "?" + params.toString();
-
-  await fetch(url, {
-    method: "GET",
-    mode: "no-cors"
+  await fetch(PPDB_ENDPOINT, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: params
   });
 
   return { status: "success" };
