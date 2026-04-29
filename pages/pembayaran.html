@@ -9,11 +9,71 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <style>
+    .payment-page {
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .payment-page .section {
+      width: min(1100px, calc(100% - 2rem));
+      padding-top: clamp(2.5rem, 5vw, 4rem);
+      padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .payment-page .section + .section {
+      margin-top: 0.5rem;
+    }
+
+    .payment-page .section-heading {
+      margin-bottom: 2rem;
+    }
+
+    .payment-page .section-heading h2 {
+      font-size: clamp(2.15rem, 4vw, 3.15rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .payment-page .section-heading p,
+    .payment-page .cta-band p,
+    .payment-page .feature-card p,
+    .payment-page .timeline-card p,
+    .payment-page .info-panel p,
+    .payment-page .field-note,
+    .payment-page .form-helper {
+      font-size: 1rem;
+    }
+
+    .payment-page .cta-band {
+      padding: clamp(1.35rem, 3vw, 2rem);
+      border-radius: 24px;
+      border: 1px solid rgba(12, 77, 162, 0.12);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(234, 243, 255, 0.96));
+      box-shadow: 0 20px 40px rgba(8, 51, 111, 0.1);
+    }
+
     .payment-toggle-group {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       margin-top: 1.5rem;
+    }
+
+    .payment-toggle-btn {
+      min-width: 190px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 0;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    }
+
+    .payment-toggle-btn:hover,
+    .payment-toggle-btn:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+      box-shadow: 0 16px 28px rgba(8, 51, 111, 0.15);
     }
 
     .payment-toggle-btn.active {
@@ -25,9 +85,130 @@
     .payment-form-panel[hidden] {
       display: none;
     }
+
+    .payment-form-panel {
+      margin-top: 0.75rem;
+    }
+
+    .payment-page .ppdb-form-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 18px 36px rgba(8, 51, 111, 0.1);
+      border: 1px solid rgba(12, 77, 162, 0.1);
+      padding: 20px;
+    }
+
+    .payment-page .ppdb-form-card h3 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin-bottom: 0.65rem;
+    }
+
+    .payment-page .vision-mission-grid,
+    .payment-page .feature-grid,
+    .payment-page .timeline-grid {
+      gap: 1.5rem;
+    }
+
+    .payment-page .feature-card,
+    .payment-page .timeline-card,
+    .payment-page .info-panel {
+      padding: 1.6rem;
+      border-radius: 18px;
+    }
+
+    .payment-page .feature-card h3,
+    .payment-page .timeline-card h3,
+    .payment-page .info-panel h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .payment-page .form-grid {
+      gap: 1.2rem 1.4rem;
+    }
+
+    .payment-page .form-field {
+      gap: 0.55rem;
+    }
+
+    .payment-page .form-label {
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .payment-page .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(12, 77, 162, 0.16);
+      background: #ffffff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .payment-page .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(47, 133, 255, 0.14);
+      outline: none;
+    }
+
+    .payment-page .submit-btn {
+      border-radius: 8px;
+      padding: 12px 20px;
+    }
+
+    .payment-page .timeline-step {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .payment-page .section {
+        width: min(100%, calc(100% - 1.25rem));
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      .payment-page .section-heading {
+        margin-bottom: 1.35rem;
+      }
+
+      .payment-page .section-heading h2 {
+        font-size: 1.8rem;
+      }
+
+      .payment-page .cta-band,
+      .payment-page .ppdb-form-card,
+      .payment-page .feature-card,
+      .payment-page .timeline-card,
+      .payment-page .info-panel {
+        padding: 1.15rem;
+      }
+
+      .payment-toggle-group {
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .payment-toggle-btn {
+        width: 100%;
+        min-width: 0;
+        font-size: 0.96rem;
+      }
+
+      .payment-page .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .payment-page .submit-btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
-<body data-page="pembayaran" data-root="..">
+<body class="payment-page" data-page="pembayaran" data-root="..">
   <div data-include="navbar"></div>
 
   <main>
