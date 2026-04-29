@@ -6,28 +6,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function submitToServer(data) {
-  const payload = buildServerPayload(data);
-  const formData = buildFormData(payload);
-  console.log("Sending data:", payload);
+  const formData = new FormData();
+  formData.append("namaLengkap", data.namaLengkap || "");
+  formData.append("nisn", data.nisn || "");
+  formData.append("tempatLahir", data.tempatLahir || "");
+  formData.append("tanggalLahir", data.tanggalLahir || "");
+  formData.append("jenisKelamin", data.jenisKelamin || "");
+  formData.append("alamat", data.alamat || "");
+  formData.append("noHp", data.noHp || "");
+  formData.append("email", data.email || "");
+  formData.append("pilihanJurusan", data.pilihanJurusan || "");
 
-  try {
-    const response = await fetch(PPDB_ENDPOINT, {
-      method: "POST",
-      mode: "no-cors",
-      body: formData
-    });
+  await fetch(PPDB_ENDPOINT, {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  });
 
-    const result = {
-      status: "submitted",
-      type: response.type
-    };
-
-    console.log("Response:", result);
-    return result;
-  } catch (error) {
-    console.error("Fetch error:", error);
-    throw error;
-  }
+  return { status: "success" };
 }
 
 function buildServerPayload(data) {
