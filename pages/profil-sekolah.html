@@ -6,64 +6,79 @@
   <title>PUSBENG | Profil Sekolah</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    .profile-page {
+    .profile-page * {
       font-family: "Poppins", sans-serif;
-    }
-
-    .profile-page h1,
-    .profile-page h2,
-    .profile-page h3,
-    .profile-page p,
-    .profile-page li,
-    .profile-page span,
-    .profile-page strong {
-      font-family: "Poppins", sans-serif;
-    }
-
-    .profile-page .page-hero h1,
-    .profile-page .section-heading h2 {
-      font-family: "Amiri", serif;
-      letter-spacing: 0.5px;
-    }
-
-    .profile-page .hero-text,
-    .profile-page p,
-    .profile-page li {
-      line-height: 1.7;
-      color: #444;
     }
 
     .profile-page h1,
     .profile-page h2,
     .profile-page h3 {
+      font-family: "Amiri", serif;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-page .section {
+      padding: 40px 20px;
+    }
+
+    .profile-page p {
+      line-height: 1.8;
+      margin-bottom: 16px;
+      color: #444;
+    }
+
+    .profile-page li {
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .profile-page h1 {
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .profile-page h2 {
       margin-bottom: 12px;
+    }
+
+    .profile-page h3 {
+      margin-bottom: 12px;
+    }
+
+    .profile-page .section-heading {
+      margin-bottom: 2rem;
+    }
+
+    .profile-page .section-heading h2,
+    .profile-page .page-hero h1 {
+      line-height: 1.25;
+    }
+
+    .profile-page .page-hero-panel {
+      padding: 24px;
+      border-radius: 16px;
+    }
+
+    .profile-page .card {
+      padding: 24px;
+      border-radius: 16px;
+      background: white;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .profile-page .card p {
+      max-width: 700px;
     }
 
     .profile-page .about-card,
     .profile-page .stats-card,
     .profile-page .info-panel,
     .profile-page .feature-card {
-      padding: 24px;
-      border-radius: 12px;
-      margin-bottom: 24px;
-      background: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .profile-page .about-card p,
-    .profile-page .info-panel p,
-    .profile-page .feature-card p {
-      margin-bottom: 14px;
-    }
-
-    .profile-page .about-card p:last-child,
-    .profile-page .info-panel p:last-child,
-    .profile-page .feature-card p:last-child {
-      margin-bottom: 0;
+      border: 0;
     }
 
     .profile-page .info-panel ul {
@@ -80,13 +95,10 @@
       background: linear-gradient(180deg, rgba(12, 77, 162, 0.98), rgba(7, 41, 89, 0.98));
     }
 
+    .profile-page .stats-card p,
     .profile-page .stats-card span,
     .profile-page .stats-card strong {
       color: var(--white);
-    }
-
-    .profile-page .section-heading {
-      margin-bottom: 2rem;
     }
 
     .profile-page .feature-grid,
@@ -95,19 +107,27 @@
       gap: 1.5rem;
     }
 
+    @media (min-width: 768px) {
+      .profile-page .section {
+        padding: 60px 40px;
+      }
+    }
+
     @media (max-width: 768px) {
-      .profile-page .about-card,
-      .profile-page .stats-card,
-      .profile-page .info-panel,
-      .profile-page .feature-card {
-        padding: 16px;
+      .profile-page .card,
+      .profile-page .page-hero-panel {
+        padding: 18px;
       }
 
       .profile-page h1 {
         font-size: 22px;
       }
 
-      .profile-page p,
+      .profile-page p {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
       .profile-page li {
         font-size: 14px;
       }
@@ -138,7 +158,7 @@
       </div>
 
       <div class="about-grid">
-        <div class="about-card">
+        <div class="about-card card">
           <p>
             PUSBENG berkomitmen menyediakan lingkungan pendidikan yang aman, inklusif, dan berpandangan maju bagi setiap siswa. Kami memadukan fondasi akademik yang kuat dengan pengembangan karakter, integrasi teknologi, dan kesempatan ekstrakurikuler yang bermakna.
           </p>
@@ -147,7 +167,7 @@
           </p>
         </div>
 
-        <div class="stats-card">
+        <div class="stats-card card">
           <div class="stat-item">
             <strong>1.250+</strong>
             <span>Siswa Aktif</span>
@@ -171,14 +191,14 @@
       </div>
 
       <div class="vision-mission-grid">
-        <article class="info-panel">
+        <article class="info-panel card">
           <h3>Visi</h3>
           <p>
             Menjadi sekolah unggulan yang melahirkan peserta didik berpengetahuan, kreatif, beretika, dan siap memberikan kontribusi positif bagi masyarakat.
           </p>
         </article>
 
-        <article class="info-panel">
+        <article class="info-panel card">
           <h3>Misi</h3>
           <ul>
             <li>Menyelenggarakan pendidikan berkualitas melalui pembelajaran yang inovatif dan adaptif.</li>
@@ -197,15 +217,15 @@
       </div>
 
       <div class="feature-grid">
-        <article class="feature-card">
+        <article class="feature-card card">
           <h3>Budaya Prestasi</h3>
           <p>Sekolah mendorong setiap siswa untuk bertumbuh melalui target belajar yang terukur, pendampingan guru, dan apresiasi atas setiap capaian.</p>
         </article>
-        <article class="feature-card">
+        <article class="feature-card card">
           <h3>Karakter Positif</h3>
           <p>Nilai disiplin, tanggung jawab, gotong royong, dan kepedulian sosial ditanamkan melalui kegiatan belajar maupun program sekolah.</p>
         </article>
-        <article class="feature-card">
+        <article class="feature-card card">
           <h3>Kolaborasi Digital</h3>
           <p>PUSBENG memanfaatkan teknologi sebagai sarana pembelajaran agar siswa terbiasa berpikir kritis, kreatif, dan komunikatif.</p>
         </article>
