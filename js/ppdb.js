@@ -7,22 +7,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function submitToServer(data) {
   const payload = buildServerPayload(data);
-  const response = await fetch(PPDB_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  });
+  console.log("Sending data:", payload);
 
-  const result = await parseServerResponse(response);
+  let response;
 
-  if (!response.ok) {
-    throw new Error(`Server mengembalikan status ${response.status}.`);
+  try {
+    response = await fetch(PPDB_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error;
   }
 
-  if (result && (result.success === false || result.status === "error")) {
-    throw new Error(result.message || "Server menolak data pendaftaran.");
+  const result = await parseServerResponse(response);
+  console.log("Response:", result);
+
+  if (!response.ok) {
+    const statusError = new Error(`Server mengembalikan status ${response.status}.`);
+    console.error("HTTP error response:", {
+      status: response.status,
+      statusText: response.statusText,
+      result
+    });
+    throw statusError;
+  }
+
+  if (result && result.status && result.status !== "success") {
+    const serverError = new Error(result.message || "Server menolak data pendaftaran.");
+    console.error("Server error response:", result);
+    throw serverError;
   }
 
   return result;
@@ -38,8 +56,7 @@ function buildServerPayload(data) {
     alamat: data.alamat,
     noHp: data.noHp,
     email: data.email,
-    pilihanJurusan: data.pilihanJurusan,
-    dikirimPada: data.dikirimPada
+    pilihanJurusan: data.pilihanJurusan
   };
 }
 
