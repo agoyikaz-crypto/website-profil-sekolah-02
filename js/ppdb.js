@@ -1,6 +1,100 @@
+const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18El-H034EnBoQD2swZZK1b5oJ2GAfRJuM43KkqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
+const PPDB_BACKUP_KEY = "ppdbDataBackup";
+
 document.addEventListener("DOMContentLoaded", () => {
   initPpdbForm();
 });
+
+async function submitToServer(data) {
+  const response = await fetch(PPDB_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  const result = await parseServerResponse(response);
+
+  if (!response.ok) {
+    throw new Error(`Server mengembalikan status ${response.status}.`);
+  }
+
+  if (result && (result.success === false || result.status === "error")) {
+    throw new Error(result.message || "Server menolak data pendaftaran.");
+  }
+
+  return result;
+}
+
+async function parseServerResponse(response) {
+  const responseText = await response.text();
+
+  if (!responseText) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(responseText);
+  } catch (error) {
+    return { raw: responseText };
+  }
+}
+
+function saveBackupToLocalStorage(studentData) {
+  const storedData = getBackupData();
+  storedData.push({
+    ...studentData,
+    statusPengiriman: "backup-lokal",
+    disimpanPada: new Date().toLocaleString("id-ID", {
+      dateStyle: "full",
+      timeStyle: "short"
+    })
+  });
+  localStorage.setItem(PPDB_BACKUP_KEY, JSON.stringify(storedData));
+}
+
+function getBackupData() {
+  try {
+    const parsedData = JSON.parse(localStorage.getItem(PPDB_BACKUP_KEY) || "[]");
+    return Array.isArray(parsedData) ? parsedData : [];
+  } catch (error) {
+    console.error("Gagal membaca backup localStorage:", error);
+    return [];
+  }
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (char) => {
+    const htmlEntities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    };
+
+    return htmlEntities[char];
+  });
+}
+
+function formatDate(value) {
+  if (!value) {
+    return "-";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
+}
 
 function initPpdbForm() {
   const form = document.getElementById("ppdbForm");
@@ -26,8 +120,6 @@ function initPpdbForm() {
     pilihanJurusan: { label: "Pilihan Jurusan", required: true }
   };
 
-  renderLatestSubmission();
-
   Object.keys(fieldRules).forEach((fieldName) => {
     const field = form.elements[fieldName];
 
@@ -45,7 +137,7 @@ function initPpdbForm() {
     clearError("uploadFoto");
   });
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const isValid = validateForm();
@@ -58,22 +150,23 @@ function initPpdbForm() {
 
     setLoadingState(true);
 
-    window.setTimeout(() => {
-      try {
-        const studentData = collectFormData();
-        saveToLocalStorage(studentData);
-        renderConfirmation(studentData);
-        form.reset();
-        clearAllErrors();
-        setLoadingState(false);
-        showToast("Pendaftaran berhasil! Data Anda telah tersimpan.");
-        window.location.hash = "konfirmasi-ppdb";
-        confirmationSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      } catch (error) {
-        setLoadingState(false);
-        showToast("Data belum dapat disimpan. Silakan coba lagi.");
-      }
-    }, 900);
+    const studentData = collectFormData();
+
+    try {
+      await submitToServer(studentData);
+      renderConfirmation(studentData);
+      form.reset();
+      clearAllErrors();
+      showToast("Pendaftaran berhasil! Data Anda telah tersimpan.");
+      window.location.hash = "konfirmasi-ppdb";
+      confirmationSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (error) {
+      console.error("Gagal mengirim data PPDB ke server:", error);
+      saveBackupToLocalStorage(studentData);
+      showToast("Gagal mengirim ke server. Data disimpan sebagai cadangan di browser.");
+    } finally {
+      setLoadingState(false);
+    }
   });
 
   function validateForm() {
@@ -149,32 +242,6 @@ function initPpdbForm() {
         timeStyle: "short"
       })
     };
-  }
-
-  function saveToLocalStorage(studentData) {
-    const storedData = getStoredData();
-    storedData.push(studentData);
-    localStorage.setItem("ppdbData", JSON.stringify(storedData));
-  }
-
-  function getStoredData() {
-    try {
-      const parsedData = JSON.parse(localStorage.getItem("ppdbData") || "[]");
-      return Array.isArray(parsedData) ? parsedData : [];
-    } catch (error) {
-      return [];
-    }
-  }
-
-  function renderLatestSubmission() {
-    const storedData = getStoredData();
-    const latestData = storedData[storedData.length - 1];
-
-    if (!latestData) {
-      return;
-    }
-
-    renderConfirmation(latestData);
   }
 
   function renderConfirmation(studentData) {
@@ -263,37 +330,5 @@ function initPpdbForm() {
     showToast.timeoutId = window.setTimeout(() => {
       toast.classList.remove("show");
     }, 2600);
-  }
-
-  function formatDate(value) {
-    if (!value) {
-      return "-";
-    }
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-      return value;
-    }
-
-    return date.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric"
-    });
-  }
-
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, (char) => {
-      const htmlEntities = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      };
-
-      return htmlEntities[char];
-    });
   }
 }
