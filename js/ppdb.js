@@ -1,4 +1,4 @@
-const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18El-H034EnBoQD2swZZK1b5oJ2GAfRJuM43KkqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
+const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
 const PPDB_BACKUP_KEY = "ppdbDataBackup";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -6,12 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function submitToServer(data) {
+  const payload = buildServerPayload(data);
   const response = await fetch(PPDB_ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(payload)
   });
 
   const result = await parseServerResponse(response);
@@ -25,6 +26,21 @@ async function submitToServer(data) {
   }
 
   return result;
+}
+
+function buildServerPayload(data) {
+  return {
+    namaLengkap: data.namaLengkap,
+    nisn: data.nisn,
+    tempatLahir: data.tempatLahir,
+    tanggalLahir: data.tanggalLahir,
+    jenisKelamin: data.jenisKelamin,
+    alamat: data.alamat,
+    noHp: data.noHp,
+    email: data.email,
+    pilihanJurusan: data.pilihanJurusan,
+    dikirimPada: data.dikirimPada
+  };
 }
 
 async function parseServerResponse(response) {
@@ -158,12 +174,14 @@ function initPpdbForm() {
       form.reset();
       clearAllErrors();
       showToast("Pendaftaran berhasil! Data Anda telah tersimpan.");
+      window.alert("Pendaftaran berhasil");
       window.location.hash = "konfirmasi-ppdb";
       confirmationSection.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       console.error("Gagal mengirim data PPDB ke server:", error);
       saveBackupToLocalStorage(studentData);
       showToast("Gagal mengirim ke server. Data disimpan sebagai cadangan di browser.");
+      window.alert("Terjadi kesalahan");
     } finally {
       setLoadingState(false);
     }
