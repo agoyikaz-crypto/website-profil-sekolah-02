@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUSBENG | Pembayaran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body class="payment-page" data-page="pembayaran" data-root="..">
+  <div data-include="navbar"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="page-hero-panel">
+          <p class="hero-kicker">Pembayaran</p>
+          <h1>Layanan pembayaran yang tertata dan jelas</h1>
+          <p class="hero-text">
+            Halaman pembayaran memudahkan orang tua dan calon siswa memahami metode transaksi, alur konfirmasi, dan layanan administrasi keuangan sekolah.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section news">
+      <div class="section-heading">
+        <p class="section-tag section-label">Pilih Jenis Pembayaran</p>
+        <h2 class="section-title">Tentukan pembayaran yang ingin Anda kirim</h2>
+      </div>
+
+      <div class="cta-band">
+        <div>
+          <p>Pilih salah satu jenis pembayaran di bawah ini. Form yang sesuai akan langsung ditampilkan untuk Anda isi.</p>
+        </div>
+        <div class="payment-toggle-group">
+          <button type="button" class="btn btn-primary payment-toggle-btn active" data-payment-target="ppdb-payment-panel">
+            Bayar PPDB
+          </button>
+          <button type="button" class="btn btn-secondary btn-secondary-dark payment-toggle-btn" data-payment-target="spp-payment-panel">
+            Bayar SPP
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section vision-mission">
+      <div class="section-heading">
+        <p class="section-tag section-label">Form Pembayaran</p>
+        <h2 class="section-title">Kirim data pembayaran secara langsung</h2>
+      </div>
+
+      <div class="payment-form-panel" id="ppdb-payment-panel">
+        <article class="ppdb-form-card card">
+          <h3>Pembayaran PPDB</h3>
+          <p class="field-note">Gunakan formulir ini untuk pembayaran biaya pendaftaran awal sebesar Rp200.000.</p>
+
+          <form class="ppdb-form" id="ppdbPaymentForm">
+            <input type="hidden" name="jenis" value="PPDB">
+            <input type="hidden" name="detail" value="Pendaftaran">
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" for="ppdbNama">Nama</label>
+                <input class="form-input" type="text" id="ppdbNama" name="nama" required>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="ppdbNisn">NISN</label>
+                <input class="form-input" type="text" id="ppdbNisn" name="nisn" required>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="ppdbNominal">Nominal</label>
+                <input class="form-input" type="number" id="ppdbNominal" name="nominal" value="200000" required>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="ppdbMetode">Metode Pembayaran</label>
+                <select class="form-input form-select" id="ppdbMetode" name="metode" required>
+                  <option value="Transfer">Transfer</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <p class="form-helper">Data pembayaran PPDB akan dikirim ke sistem administrasi sekolah.</p>
+              <button type="submit" class="btn btn-primary submit-btn">
+                <span data-submit-label>Kirim Pembayaran PPDB</span>
+                <span class="loading-spinner" aria-hidden="true"></span>
+              </button>
+            </div>
+          </form>
+        </article>
+      </div>
+
+      <div class="payment-form-panel" id="spp-payment-panel" hidden>
+        <article class="ppdb-form-card card">
+          <h3>Pembayaran SPP</h3>
+          <p class="field-note">Isi pembayaran bulanan siswa sesuai bulan tagihan dan nominal yang akan dibayarkan.</p>
+
+          <form class="ppdb-form" id="sppPaymentForm">
+            <input type="hidden" name="jenis" value="SPP">
+            <input type="hidden" name="detail" value="Januari">
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" for="sppNama">Nama</label>
+                <input class="form-input" type="text" id="sppNama" name="nama" required>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="sppNisn">NISN</label>
+                <input class="form-input" type="text" id="sppNisn" name="nisn" required>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="sppBulan">Bulan</label>
+                <select class="form-input form-select" id="sppBulan" name="bulan" required>
+                  <option value="Januari">Januari</option>
+                  <option value="Februari">Februari</option>
+                  <option value="Maret">Maret</option>
+                  <option value="April">April</option>
+                  <option value="Mei">Mei</option>
+                  <option value="Juni">Juni</option>
+                  <option value="Juli">Juli</option>
+                  <option value="Agustus">Agustus</option>
+                  <option value="September">September</option>
+                  <option value="Oktober">Oktober</option>
+                  <option value="November">November</option>
+                  <option value="Desember">Desember</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="sppNominal">Nominal</label>
+                <input class="form-input" type="number" id="sppNominal" name="nominal" required>
+              </div>
+
+              <div class="form-field full-width">
+                <label class="form-label" for="sppMetode">Metode Pembayaran</label>
+                <select class="form-input form-select" id="sppMetode" name="metode" required>
+                  <option value="Transfer">Transfer</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <p class="form-helper">Gunakan form ini untuk pembayaran SPP bulanan dan pastikan nominal sesuai tagihan.</p>
+              <button type="submit" class="btn btn-primary submit-btn">
+                <span data-submit-label>Kirim Pembayaran SPP</span>
+                <span class="loading-spinner" aria-hidden="true"></span>
+              </button>
+            </div>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <section class="section about">
+      <div class="section-heading">
+        <p class="section-tag section-label">Metode Pembayaran</p>
+        <h2 class="section-title">Pilih cara pembayaran yang paling nyaman</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card card">
+          <h3>Transfer Bank</h3>
+          <p>Pembayaran dapat dilakukan melalui rekening resmi sekolah dengan mencantumkan nama siswa pada keterangan transfer.</p>
+        </article>
+        <article class="feature-card card">
+          <h3>Virtual Account</h3>
+          <p>Untuk transaksi yang lebih cepat, sekolah dapat menyiapkan nomor virtual account sesuai kebutuhan administrasi.</p>
+        </article>
+        <article class="feature-card card">
+          <h3>Pembayaran Langsung</h3>
+          <p>Orang tua juga dapat melakukan pembayaran langsung melalui loket administrasi pada jam operasional sekolah.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section vision-mission">
+      <div class="section-heading">
+        <p class="section-tag section-label">Alur Administrasi</p>
+        <h2 class="section-title">Langkah pembayaran dan konfirmasi</h2>
+      </div>
+
+      <div class="timeline-grid">
+        <article class="timeline-card card">
+          <span class="timeline-step">01</span>
+          <h3>Lakukan pembayaran</h3>
+          <p>Pilih metode pembayaran yang tersedia sesuai tagihan atau kebutuhan administrasi.</p>
+        </article>
+        <article class="timeline-card card">
+          <span class="timeline-step">02</span>
+          <h3>Simpan bukti transaksi</h3>
+          <p>Pastikan bukti transfer atau bukti pembayaran tersimpan dengan jelas untuk proses verifikasi.</p>
+        </article>
+        <article class="timeline-card card">
+          <span class="timeline-step">03</span>
+          <h3>Kirim konfirmasi</h3>
+          <p>Kirim bukti pembayaran ke admin sekolah melalui WhatsApp atau layanan yang disediakan.</p>
+        </article>
+        <article class="timeline-card card">
+          <span class="timeline-step">04</span>
+          <h3>Verifikasi selesai</h3>
+          <p>Tim administrasi akan memeriksa transaksi dan memberikan konfirmasi setelah data sesuai.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section news">
+      <div class="section-heading">
+        <p class="section-tag section-label">Informasi Tambahan</p>
+        <h2 class="section-title">Hal yang perlu diperhatikan</h2>
+      </div>
+
+      <div class="vision-mission-grid">
+        <article class="info-panel card">
+          <h3>Komponen Pembayaran</h3>
+          <ul>
+            <li>Biaya daftar ulang dan administrasi awal.</li>
+            <li>Pembayaran kegiatan atau program khusus sekolah.</li>
+            <li>Pembayaran berkala sesuai ketentuan sekolah.</li>
+          </ul>
+        </article>
+
+        <article class="info-panel card">
+          <h3>Bantuan Keuangan</h3>
+          <ul>
+            <li>Konfirmasi pembayaran dapat dilakukan pada jam kerja sekolah.</li>
+            <li>Hubungi admin jika membutuhkan rincian tagihan.</li>
+            <li>Simpan semua bukti transaksi untuk arsip pribadi.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="../js/app.js"></script>
+  <script>
+    const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
+
+    async function kirimPembayaran(data) {
+      const params = new URLSearchParams();
+
+      params.append("nama", data.nama);
+      params.append("nisn", data.nisn);
+      params.append("jenis", data.jenis);
+      params.append("detail", data.detail);
+      params.append("nominal", data.nominal);
+      params.append("metode", data.metode);
+
+      await fetch(PPDB_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: params
+      });
+
+      alert("Payment submitted successfully!");
+    }
+
+    function setPaymentLoading(form, isLoading) {
+      const button = form.querySelector(".submit-btn");
+      const label = form.querySelector("[data-submit-label]");
+
+      if (!button || !label) {
+        return;
+      }
+
+      button.disabled = isLoading;
+      button.classList.toggle("is-loading", isLoading);
+
+      if (form.id === "ppdbPaymentForm") {
+        label.textContent = isLoading ? "Mengirim Pembayaran PPDB..." : "Kirim Pembayaran PPDB";
+        return;
+      }
+
+      label.textContent = isLoading ? "Mengirim Pembayaran SPP..." : "Kirim Pembayaran SPP";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const ppdbForm = document.getElementById("ppdbPaymentForm");
+      const sppForm = document.getElementById("sppPaymentForm");
+      const sppBulan = document.getElementById("sppBulan");
+      const sppDetail = sppForm ? sppForm.elements.detail : null;
+      const toggleButtons = document.querySelectorAll(".payment-toggle-btn");
+      const paymentPanels = document.querySelectorAll(".payment-form-panel");
+
+      function tampilkanForm(targetId) {
+        paymentPanels.forEach((panel) => {
+          panel.hidden = panel.id !== targetId;
+        });
+
+        toggleButtons.forEach((button) => {
+          const isActive = button.dataset.paymentTarget === targetId;
+          button.classList.toggle("active", isActive);
+
+          if (isActive) {
+            button.classList.remove("btn-secondary", "btn-secondary-dark");
+            button.classList.add("btn-primary");
+            return;
+          }
+
+          button.classList.remove("btn-primary");
+          button.classList.add("btn-secondary", "btn-secondary-dark");
+        });
+      }
+
+      toggleButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tampilkanForm(button.dataset.paymentTarget);
+        });
+      });
+
+      if (sppBulan && sppDetail) {
+        sppBulan.addEventListener("change", () => {
+          sppDetail.value = sppBulan.value;
+        });
+      }
+
+      if (ppdbForm) {
+        ppdbForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          setPaymentLoading(ppdbForm, true);
+
+          const data = {
+            nama: ppdbForm.elements.nama.value.trim(),
+            nisn: ppdbForm.elements.nisn.value.trim(),
+            jenis: ppdbForm.elements.jenis.value,
+            detail: ppdbForm.elements.detail.value,
+            nominal: ppdbForm.elements.nominal.value,
+            metode: ppdbForm.elements.metode.value
+          };
+
+          try {
+            await kirimPembayaran(data);
+            ppdbForm.reset();
+            ppdbForm.elements.nominal.value = "200000";
+            ppdbForm.elements.metode.value = "Transfer";
+          } finally {
+            setPaymentLoading(ppdbForm, false);
+          }
+        });
+      }
+
+      if (sppForm) {
+        sppForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          setPaymentLoading(sppForm, true);
+
+          const data = {
+            nama: sppForm.elements.nama.value.trim(),
+            nisn: sppForm.elements.nisn.value.trim(),
+            jenis: sppForm.elements.jenis.value,
+            detail: sppForm.elements.detail.value,
+            nominal: sppForm.elements.nominal.value,
+            metode: sppForm.elements.metode.value
+          };
+
+          try {
+            await kirimPembayaran(data);
+            sppForm.reset();
+            sppForm.elements.bulan.value = "Januari";
+            sppForm.elements.detail.value = "Januari";
+            sppForm.elements.metode.value = "Transfer";
+          } finally {
+            setPaymentLoading(sppForm, false);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

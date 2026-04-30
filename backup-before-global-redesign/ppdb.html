@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUSBENG | PPDB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body data-page="ppdb" data-root="..">
+  <div data-include="navbar"></div>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="page-hero-panel">
+          <p class="hero-kicker">PPDB</p>
+          <h1>Formulir pendaftaran peserta didik baru</h1>
+          <p class="hero-text">
+            Silakan lengkapi data calon siswa secara lengkap. Sistem akan menyimpan pendaftaran Anda dan menampilkan ringkasan konfirmasi setelah formulir berhasil dikirim.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about">
+      <div class="section-heading">
+        <p class="section-tag section-label">Alur Pendaftaran</p>
+        <h2 class="section-title">Langkah mudah untuk bergabung dengan PUSBENG</h2>
+      </div>
+
+      <div class="timeline-grid">
+        <article class="timeline-card card">
+          <span class="timeline-step">01</span>
+          <h3>Isi formulir</h3>
+          <p>Calon siswa mengisi formulir pendaftaran secara lengkap melalui layanan administrasi sekolah.</p>
+        </article>
+        <article class="timeline-card card">
+          <span class="timeline-step">02</span>
+          <h3>Unggah berkas</h3>
+          <p>Lampirkan identitas siswa, kartu keluarga, rapor, dan dokumen pendukung lainnya sesuai ketentuan.</p>
+        </article>
+        <article class="timeline-card card">
+          <span class="timeline-step">03</span>
+          <h3>Verifikasi data</h3>
+          <p>Tim sekolah memeriksa kelengkapan dokumen dan menghubungi calon siswa jika ada data yang perlu dilengkapi.</p>
+        </article>
+        <article class="timeline-card card">
+          <span class="timeline-step">04</span>
+          <h3>Seleksi dan pengumuman</h3>
+          <p>Hasil seleksi diumumkan sesuai jadwal dan peserta yang lolos dapat melanjutkan ke tahap daftar ulang.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section vision-mission ppdb-form-section">
+      <div class="section-heading">
+        <p class="section-tag section-label">Form Pendaftaran</p>
+        <h2 class="section-title">Lengkapi data calon siswa dengan benar</h2>
+      </div>
+
+      <div class="ppdb-layout">
+        <aside class="ppdb-side-card card">
+          <h3>Petunjuk Pengisian</h3>
+          <p>Pastikan semua data wajib diisi dengan benar agar proses verifikasi berjalan lancar.</p>
+          <ul class="ppdb-side-list">
+            <li>Gunakan nama lengkap sesuai dokumen resmi.</li>
+            <li>Isi NISN dan tanggal lahir dengan data yang valid.</li>
+            <li>Pilih jurusan sesuai minat dan rencana studi.</li>
+            <li>Unggah foto hanya jika sudah tersedia.</li>
+          </ul>
+
+          <div class="ppdb-side-highlight">
+            <strong>Status penyimpanan</strong>
+            <p>Data akan dikirim ke server Google Sheets. Jika pengiriman gagal, data disimpan sementara di browser dengan kunci <code>ppdbDataBackup</code>.</p>
+          </div>
+        </aside>
+
+        <div class="ppdb-form-card card">
+          <form id="ppdbForm" class="ppdb-form" novalidate>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" for="namaLengkap">Nama Lengkap</label>
+                <input class="form-input" type="text" id="namaLengkap" name="namaLengkap" placeholder="Masukkan nama lengkap">
+                <p class="field-error" data-error-for="namaLengkap"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="nisn">NISN</label>
+                <input class="form-input" type="number" id="nisn" name="nisn" inputmode="numeric" placeholder="Masukkan NISN">
+                <p class="field-error" data-error-for="nisn"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="tempatLahir">Tempat Lahir</label>
+                <input class="form-input" type="text" id="tempatLahir" name="tempatLahir" placeholder="Contoh: Tangerang Selatan">
+                <p class="field-error" data-error-for="tempatLahir"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="tanggalLahir">Tanggal Lahir</label>
+                <input class="form-input" type="date" id="tanggalLahir" name="tanggalLahir">
+                <p class="field-error" data-error-for="tanggalLahir"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="jenisKelamin">Jenis Kelamin</label>
+                <select class="form-input form-select" id="jenisKelamin" name="jenisKelamin">
+                  <option value="">Pilih jenis kelamin</option>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+                <p class="field-error" data-error-for="jenisKelamin"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="noHp">No HP</label>
+                <input class="form-input" type="tel" id="noHp" name="noHp" placeholder="Contoh: 081234567890">
+                <p class="field-error" data-error-for="noHp"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" id="email" name="email" placeholder="nama@email.com">
+                <p class="field-error" data-error-for="email"></p>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="pilihanJurusan">Pilihan Jurusan</label>
+                <select class="form-input form-select" id="pilihanJurusan" name="pilihanJurusan">
+                  <option value="">Pilih jurusan</option>
+                  <option value="IPA">IPA</option>
+                  <option value="IPS">IPS</option>
+                  <option value="Bahasa">Bahasa</option>
+                  <option value="Teknologi Informasi">Teknologi Informasi</option>
+                  <option value="Bisnis dan Manajemen">Bisnis dan Manajemen</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <p class="field-error" data-error-for="pilihanJurusan"></p>
+              </div>
+
+              <div class="form-field full-width">
+                <label class="form-label" for="alamat">Alamat</label>
+                <textarea class="form-input form-textarea" id="alamat" name="alamat" rows="4" placeholder="Masukkan alamat lengkap"></textarea>
+                <p class="field-error" data-error-for="alamat"></p>
+              </div>
+
+              <div class="form-field full-width">
+                <label class="form-label" for="uploadFoto">Upload Foto <span class="optional-text">(Opsional)</span></label>
+                <input class="form-input form-file" type="file" id="uploadFoto" name="uploadFoto" accept="image/*">
+                <p class="field-note">Format foto bebas, maksimal satu file.</p>
+                <p class="field-error" data-error-for="uploadFoto"></p>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <p class="form-helper">Pastikan seluruh data sudah benar sebelum menekan tombol kirim.</p>
+              <button type="submit" class="btn btn-primary submit-btn" id="submitPpdbBtn">
+                <span data-submit-label>Kirim Pendaftaran</span>
+                <span class="loading-spinner" aria-hidden="true"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section news confirmation-section" id="konfirmasi-ppdb" hidden>
+      <div class="section-heading">
+        <p class="section-tag section-label">Konfirmasi Pendaftaran</p>
+        <h2 class="section-title">Ringkasan data yang berhasil dikirim</h2>
+      </div>
+
+      <div class="confirmation-card card">
+        <div class="confirmation-banner">
+          <h3>Pendaftaran berhasil! Data Anda telah tersimpan.</h3>
+          <p>Silakan periksa kembali ringkasan data berikut sebelum melanjutkan ke tahap administrasi berikutnya.</p>
+        </div>
+
+        <div class="confirmation-grid" id="confirmationData"></div>
+
+        <div class="hero-actions">
+          <a href="./pembayaran.html" class="btn btn-primary">Lanjut ke Pembayaran</a>
+          <a href="./kontak.html" class="btn btn-secondary btn-secondary-dark">Hubungi Admin</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section vision-mission">
+      <div class="section-heading">
+        <p class="section-tag section-label">Informasi Penting</p>
+        <h2 class="section-title">Persyaratan dan jalur pendaftaran</h2>
+      </div>
+
+      <div class="vision-mission-grid">
+        <article class="info-panel card">
+          <h3>Persyaratan Umum</h3>
+          <ul>
+            <li>Fotokopi kartu keluarga dan akta kelahiran.</li>
+            <li>Fotokopi rapor atau surat keterangan lulus.</li>
+            <li>Pas foto terbaru ukuran 3x4.</li>
+            <li>Formulir pendaftaran yang telah diisi lengkap.</li>
+          </ul>
+        </article>
+
+        <article class="info-panel card">
+          <h3>Jalur Pendaftaran</h3>
+          <ul>
+            <li>Jalur reguler untuk calon siswa umum.</li>
+            <li>Jalur prestasi untuk akademik maupun nonakademik.</li>
+            <li>Jalur afirmasi sesuai kebijakan sekolah.</li>
+            <li>Jalur perpindahan orang tua bila memenuhi syarat.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section news">
+      <div class="cta-band">
+        <div>
+          <p class="section-tag section-label">Bantuan Administrasi</p>
+          <h2 class="section-title">Setelah diterima, lanjutkan ke halaman pembayaran</h2>
+          <p>Informasi daftar ulang dan metode pembayaran tersedia di halaman khusus agar proses administrasi lebih mudah dipahami.</p>
+        </div>
+        <div class="hero-actions">
+          <a href="./pembayaran.html" class="btn btn-primary">Lihat Pembayaran</a>
+          <a href="./kontak.html" class="btn btn-secondary btn-secondary-dark">Hubungi Admin</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <div class="form-toast" id="ppdbToast" role="status" aria-live="polite"></div>
+  <script src="../js/app.js"></script>
+  <script src="../js/ppdb.js"></script>
+</body>
+</html>
