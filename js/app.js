@@ -47,6 +47,8 @@ function renderSharedLayout() {
           <ul class="nav-links">
             ${navItems}
           </ul>
+
+          <a href="${root}/pages/ppdb.html" class="nav-cta">Daftar PPDB</a>
         </nav>
       </header>
     `;
@@ -76,6 +78,11 @@ function renderSharedLayout() {
             <p>Email: info@blueridgehs.edu</p>
             <p>Telepon: +62 21 555 1234</p>
             <p>Jl. Aria Putra No.9, Ciputat, Tangerang Selatan</p>
+            <div class="footer-social" aria-label="Tautan sosial sekolah">
+              <a href="${root}/pages/kontak.html">WhatsApp</a>
+              <a href="${root}/pages/kontak.html">Instagram</a>
+              <a href="${root}/pages/kontak.html">Email</a>
+            </div>
             <p>&copy; 2026 PUSBENG. Hak cipta dilindungi.</p>
           </div>
         </div>
