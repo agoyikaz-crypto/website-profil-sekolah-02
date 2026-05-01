@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   renderSharedLayout();
+  enhanceEditorialHeadlines();
   enhanceImageFrames();
+  enhanceScrollCues();
   initNavigation();
   initHeroSlider();
   initParallax();
@@ -111,6 +113,41 @@ function renderSharedLayout() {
   }
 }
 
+function enhanceEditorialHeadlines() {
+  const headlineElements = document.querySelectorAll(".hero h1, .page-hero h1, .section-title");
+
+  headlineElements.forEach((headline) => {
+    if (headline.querySelector(".headline-accent")) {
+      return;
+    }
+
+    const text = headline.textContent.trim();
+    const words = text.split(/\s+/);
+
+    if (words.length < 2) {
+      return;
+    }
+
+    const accentIndex = words.length > 3 ? words.length - 1 : 0;
+    headline.textContent = "";
+
+    words.forEach((word, index) => {
+      if (index > 0) {
+        headline.append(" ");
+      }
+
+      if (index === accentIndex) {
+        const accent = document.createElement("span");
+        accent.className = "headline-accent";
+        accent.textContent = word;
+        headline.append(accent);
+      } else {
+        headline.append(word);
+      }
+    });
+  });
+}
+
 function enhanceImageFrames() {
   const galleryImages = document.querySelectorAll(".gallery-grid > img");
   const storyImages = document.querySelectorAll(".news-card > img");
@@ -128,6 +165,22 @@ function wrapImage(image, className) {
   frame.className = className;
   image.parentNode.insertBefore(frame, image);
   frame.appendChild(image);
+}
+
+function enhanceScrollCues() {
+  const cueTargets = document.querySelectorAll(".hero, .page-hero, .section");
+
+  cueTargets.forEach((target) => {
+    if (target.querySelector(".scroll-cue")) {
+      return;
+    }
+
+    const cue = document.createElement("div");
+    cue.className = "scroll-cue";
+    cue.setAttribute("aria-hidden", "true");
+    cue.innerHTML = "<span></span><span></span><span></span>";
+    target.appendChild(cue);
+  });
 }
 
 function initNavigation() {
