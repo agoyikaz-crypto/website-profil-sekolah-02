@@ -31,7 +31,7 @@ function renderSharedLayout() {
     const navItems = links
       .map(
         (link) =>
-          `<li><a href="${link.href}" class="${link.id === currentPage ? "active" : ""}"><span class="nav-link-text">${link.label}</span></a></li>`
+          `<li><a href="${link.href}" class="${link.id === currentPage ? "active" : ""}"><span class="nav-link-text" data-text="${link.label}">${link.label}</span></a></li>`
       )
       .join("");
 
