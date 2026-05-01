@@ -2863,3 +2863,160 @@ body[data-page="home"] main {
     min-height: auto;
   }
 }
+
+/* PROFIL SEKOLAH PARALLAX & SCROLL REVEAL */
+body.profile-page main {
+  overflow: visible;
+}
+
+.profile-parallax-hero {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(11, 20, 16, 0.44)),
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=80") center calc(50% + var(--parallax-y, 0px)) / cover;
+}
+
+.profile-parallax-section {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  padding: clamp(92px, 13vh, 150px) clamp(22px, 6vw, 86px);
+  overflow: clip;
+  isolation: isolate;
+  border-top: 1px solid var(--border-soft);
+  background: #0b1410;
+}
+
+.profile-parallax-section > :not(.profile-parallax-bg) {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 100%);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.profile-parallax-bg {
+  position: absolute;
+  inset: -14vh 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: var(--profile-bg);
+  background-position: center calc(50% + var(--profile-parallax, 0px));
+  background-size: cover;
+  filter: saturate(0.72) contrast(1.04) brightness(0.72);
+  transform: translate3d(0, calc(var(--profile-parallax, 0px) * -0.25), 0) scale(1.08);
+  will-change: transform, background-position;
+}
+
+.profile-parallax-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(11, 20, 16, 0.56) 42%, rgba(0, 0, 0, 0.5)),
+    radial-gradient(circle at 74% 18%, rgba(180, 190, 154, 0.12), transparent 24rem),
+    linear-gradient(180deg, rgba(5, 8, 6, 0.56), rgba(5, 8, 6, 0.88));
+}
+
+.profile-parallax-welcome {
+  --profile-bg: url("https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=1800&q=80");
+}
+
+.profile-parallax-history {
+  --profile-bg: url("https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1800&q=80");
+}
+
+.profile-parallax-values {
+  --profile-bg: url("https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1800&q=80");
+}
+
+.profile-page .section-heading {
+  max-width: 930px;
+}
+
+.profile-page .section-title {
+  max-width: 960px;
+  font-size: clamp(3.4rem, 7vw, 7.6rem);
+}
+
+.profile-page .about-grid,
+.profile-page .vision-mission-grid,
+.profile-page .feature-grid {
+  gap: 1px;
+  border: 1px solid var(--border-soft);
+  background: var(--border-soft);
+}
+
+.profile-page .card,
+.profile-page .about-card,
+.profile-page .stats-card,
+.profile-page .info-panel,
+.profile-page .feature-card {
+  border: 0;
+  background: rgba(10, 18, 14, 0.78);
+  box-shadow: none;
+  backdrop-filter: blur(3px);
+}
+
+.profile-page .stats-card {
+  background:
+    radial-gradient(circle at 80% 8%, rgba(180, 190, 154, 0.14), transparent 18rem),
+    rgba(12, 20, 16, 0.82);
+}
+
+.profile-reveal {
+  opacity: 0;
+  transform: translate3d(0, 34px, 0);
+  filter: blur(7px);
+  transition: opacity 850ms cubic-bezier(0.22, 1, 0.36, 1), transform 850ms cubic-bezier(0.22, 1, 0.36, 1), filter 850ms ease;
+  will-change: opacity, transform, filter;
+}
+
+.profile-reveal-side {
+  transform: translate3d(34px, 0, 0);
+}
+
+.profile-reveal.visible,
+.profile-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+@media (min-width: 901px) {
+  .profile-parallax-bg {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 900px) {
+  .profile-parallax-section {
+    min-height: auto;
+    padding: 84px 18px;
+    overflow: hidden;
+  }
+
+  .profile-parallax-bg {
+    inset: 0;
+    background-position: center;
+    background-attachment: scroll;
+    transform: none !important;
+  }
+
+  .profile-page .section-title {
+    font-size: clamp(2.6rem, 12vw, 4.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .profile-parallax-bg {
+    transform: none !important;
+  }
+}

@@ -253,14 +253,21 @@ function initHeroSlider() {
 
 function initParallax() {
   const parallaxTargets = document.querySelectorAll(".hero-slide, .page-hero");
+  const profileParallaxSections = document.querySelectorAll(".profile-parallax-section");
 
-  if (!parallaxTargets.length) {
+  if (!parallaxTargets.length && !profileParallaxSections.length) {
     return;
   }
 
   function updateParallax() {
     const offset = Math.min(window.scrollY * 0.08, 42);
     document.documentElement.style.setProperty("--parallax-y", `${offset}px`);
+
+    profileParallaxSections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const sectionOffset = Math.max(Math.min(rect.top * -0.12, 70), -70);
+      section.style.setProperty("--profile-parallax", `${sectionOffset}px`);
+    });
   }
 
   updateParallax();
@@ -299,7 +306,7 @@ function initStickySectionStack() {
 
 function initReveal() {
   const revealElements = document.querySelectorAll(
-    ".section, .section-heading, .hero-panel, .page-hero-panel, .news-card, .art-frame, .story-frame, .feature-card, .timeline-card, .info-panel, .contact-card, .ppdb-side-card, .ppdb-form-card, .sticky-stack-panel, .cta-band, .footer-content > div"
+    ".section, .section-heading, .hero-panel, .page-hero-panel, .news-card, .art-frame, .story-frame, .feature-card, .timeline-card, .info-panel, .contact-card, .ppdb-side-card, .ppdb-form-card, .sticky-stack-panel, .profile-reveal, .cta-band, .footer-content > div"
   );
 
   if (!revealElements.length) {
