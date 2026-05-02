@@ -99,9 +99,102 @@
         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Presentasi dan acara siswa">
       </div>
     </section>
+
+    <section class="section horizontal-gallery-container">
+      <div class="section-heading">
+        <p class="section-tag section-label">Galeri Interaktif</p>
+        <h2 class="section-title">Jelajahi kegiatan ekstrakurikuler kami</h2>
+      </div>
+
+      <div class="horizontal-scroll-wrapper" id="horizontalScrollGallery">
+        <div class="horizontal-scroll-content">
+          <!-- Futsal Section -->
+          <div class="gallery-section" data-section="futsal">
+            <div class="gallery-section-content">
+              <h3 class="gallery-section-title">Futsal</h3>
+              <p class="gallery-section-description">
+                Klub futsal PUSBENG mengembangkan kemampuan teknis, strategi permainan, dan kerja sama tim. 
+                Siswa berlatih secara rutin untuk mengikuti kompetisi antar sekolah dan membangun karakter sportivitas.
+              </p>
+              <div class="gallery-images">
+                <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=900&q=80" alt="Latihan futsal">
+                <img src="https://images.unsplash.com/photo-1554068394-14311ca22f12?auto=format&fit=crop&w=900&q=80" alt="Pertandingan futsal">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" alt="Tim futsal">
+              </div>
+              <div class="gallery-achievements">
+                <h4>Prestasi</h4>
+                <ul>
+                  <li>Juara 2 Kompetisi Futsal Antar SMP Se-Kabupaten 2025</li>
+                  <li>Best Team Spirit Tournament Futsal Pendidikan 2025</li>
+                  <li>Top Scorer Kompetisi Daerah 2024</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pramuka Section -->
+          <div class="gallery-section" data-section="pramuka">
+            <div class="gallery-section-content">
+              <h3 class="gallery-section-title">Pramuka</h3>
+              <p class="gallery-section-description">
+                Kegiatan pramuka membentuk karakter disiplin, kepemimpinan, dan kepedulian sosial. 
+                Siswa belajar keterampilan bertahan hidup, navigasi, dan kerja sama dalam berbagai kegiatan outdoor.
+              </p>
+              <div class="gallery-images">
+                <img src="https://images.unsplash.com/photo-1522778119726-7e5c5a858c91?auto=format&fit=crop&w=900&q=80" alt="Kegiatan pramuka">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" alt="Upacara pramuka">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80" alt="Kemah pramuka">
+              </div>
+              <div class="gallery-achievements">
+                <h4>Pencapaian</h4>
+                <ul>
+                  <li>Penghargaan Gerakan Pramuka Terbaik Tingkat Provinsi 2025</li>
+                  <li>Juara 1 Lomba Kemah Antarkwarcab 2024</li>
+                  <li>Sertifikat Kecakapan Baru Tingkat Gold 2024</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seni Kaligrafi Section -->
+          <div class="gallery-section" data-section="seni-kaligrafi">
+            <div class="gallery-section-content">
+              <h3 class="gallery-section-title">Seni Kaligrafi</h3>
+              <p class="gallery-section-description">
+                Klub seni kaligrafi menumbuhkan apresiasi seni Islam dan ketelitian artistik. 
+                Siswa mempelajari berbagai gaya kaligrafi, teknik penulisan, dan mengembangkan kreativitas dalam seni huruf.
+              </p>
+              <div class="gallery-images">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=900&q=80" alt="Karya kaligrafi">
+                <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=80" alt="Latihan kaligrafi">
+                <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=900&q=80" alt="Pameran karya">
+              </div>
+              <div class="gallery-achievements">
+                <h4>Karya Unggulan</h4>
+                <ul>
+                  <li>Juara 1 Lomba Kaligrafi Tingkat Nasional 2025</li>
+                  <li>Best Artistic Design Festival Seni Islam 2024</li>
+                  <li>Pameran Karya di Galeri Seni Provinsi 2024</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <span class="scroll-text">Scroll untuk menjelajahi</span>
+        <div class="scroll-dots">
+          <span class="dot active" data-section="futsal"></span>
+          <span class="dot" data-section="pramuka"></span>
+          <span class="dot" data-section="seni-kaligrafi"></span>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div data-include="footer"></div>
   <script src="../js/app.js"></script>
+  <script src="../js/horizontal-scroll.js"></script>
 </body>
 </html>
