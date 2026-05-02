@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initParallax();
   initStickySectionStack();
   initReveal();
+  initProfileFixedVideo();
   initProfileVideoReveal();
   initPageTransitions();
 });
@@ -358,6 +359,47 @@ function initProfileVideoReveal() {
   );
 
   revealElements.forEach((element) => observer.observe(element));
+}
+
+function initProfileFixedVideo() {
+  const section = document.querySelector(".profile-video-scroll");
+
+  if (!section) {
+    return;
+  }
+
+  const video = section.querySelector(".profile-bg-video");
+  let isActive = null;
+
+  function updateVideoState() {
+    const rect = section.getBoundingClientRect();
+    const active = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (active === isActive) {
+      return;
+    }
+
+    isActive = active;
+    section.classList.toggle("is-video-active", active);
+
+    if (!video) {
+      return;
+    }
+
+    if (active) {
+      const playPromise = video.play();
+
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    } else {
+      video.pause();
+    }
+  }
+
+  updateVideoState();
+  window.addEventListener("scroll", updateVideoState, { passive: true });
+  window.addEventListener("resize", updateVideoState);
 }
 
 function initPageTransitions() {
