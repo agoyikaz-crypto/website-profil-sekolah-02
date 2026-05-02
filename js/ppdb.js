@@ -152,6 +152,13 @@ function initPpdbForm() {
 
     // Build FormData from the form
     const formData = new FormData(form);
+    
+    // Add formType identifier
+    formData.append('formType', 'ppdb');
+    
+    // Add timestamp with exact header name
+    formData.append('Waktu pendaftaran', new Date().toLocaleString());
+    
     const studentData = collectFormData();
 
     try {
@@ -159,15 +166,15 @@ function initPpdbForm() {
       renderConfirmation(studentData);
       form.reset();
       clearAllErrors();
-      showToast("Pendaftaran berhasil! Data Anda telah tersimpan.");
-      window.alert("Pendaftaran berhasil");
+      showToast("Data berhasil dikirim!");
+      window.alert("Data berhasil dikirim!");
       window.location.hash = "konfirmasi-ppdb";
       confirmationSection.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       console.error("Gagal mengirim data PPDB ke server:", error);
       saveBackupToLocalStorage(studentData);
-      showToast("Gagal mengirim ke server. Data disimpan sebagai cadangan di browser.");
-      window.alert("Terjadi kesalahan");
+      showToast("Gagal mengirim data.");
+      window.alert("Gagal mengirim data.");
     } finally {
       setLoadingState(false);
     }

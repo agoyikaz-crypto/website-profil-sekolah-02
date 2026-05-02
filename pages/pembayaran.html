@@ -60,28 +60,28 @@
 
           <form class="ppdb-form" id="ppdbPaymentForm">
             <input type="hidden" name="formType" value="pembayaran">
-            <input type="hidden" name="jenis" value="PPDB">
-            <input type="hidden" name="detail" value="Pendaftaran">
+            <input type="hidden" name="Jenis Pembayaran" value="PPDB">
+            <input type="hidden" name="Detail" value="Pendaftaran">
 
             <div class="form-grid">
               <div class="form-field">
                 <label class="form-label" for="ppdbNama">Nama</label>
-                <input class="form-input" type="text" id="ppdbNama" name="nama" required>
+                <input class="form-input" type="text" id="ppdbNama" name="Nama" required>
               </div>
 
               <div class="form-field">
                 <label class="form-label" for="ppdbNisn">NISN</label>
-                <input class="form-input" type="text" id="ppdbNisn" name="nisn" required>
+                <input class="form-input" type="text" id="ppdbNisn" name="NISN" required>
               </div>
 
               <div class="form-field">
                 <label class="form-label" for="ppdbNominal">Nominal</label>
-                <input class="form-input" type="number" id="ppdbNominal" name="nominal" value="200000" required>
+                <input class="form-input" type="number" id="ppdbNominal" name="Nominal" value="200000" required>
               </div>
 
               <div class="form-field">
                 <label class="form-label" for="ppdbMetode">Metode Pembayaran</label>
-                <select class="form-input form-select" id="ppdbMetode" name="metode" required>
+                <select class="form-input form-select" id="ppdbMetode" name="Metode" required>
                   <option value="Transfer">Transfer</option>
                   <option value="Cash">Cash</option>
                 </select>
@@ -106,23 +106,23 @@
 
           <form class="ppdb-form" id="sppPaymentForm">
             <input type="hidden" name="formType" value="pembayaran">
-            <input type="hidden" name="jenis" value="SPP">
-            <input type="hidden" name="detail" value="Januari">
+            <input type="hidden" name="Jenis Pembayaran" value="SPP">
+            <input type="hidden" name="Detail" value="Januari">
 
             <div class="form-grid">
               <div class="form-field">
                 <label class="form-label" for="sppNama">Nama</label>
-                <input class="form-input" type="text" id="sppNama" name="nama" required>
+                <input class="form-input" type="text" id="sppNama" name="Nama" required>
               </div>
 
               <div class="form-field">
                 <label class="form-label" for="sppNisn">NISN</label>
-                <input class="form-input" type="text" id="sppNisn" name="nisn" required>
+                <input class="form-input" type="text" id="sppNisn" name="NISN" required>
               </div>
 
               <div class="form-field">
                 <label class="form-label" for="sppBulan">Bulan</label>
-                <select class="form-input form-select" id="sppBulan" name="bulan" required>
+                <select class="form-input form-select" id="sppBulan" name="Bulan" required>
                   <option value="Januari">Januari</option>
                   <option value="Februari">Februari</option>
                   <option value="Maret">Maret</option>
@@ -140,12 +140,12 @@
 
               <div class="form-field">
                 <label class="form-label" for="sppNominal">Nominal</label>
-                <input class="form-input" type="number" id="sppNominal" name="nominal" required>
+                <input class="form-input" type="number" id="sppNominal" name="Nominal" required>
               </div>
 
               <div class="form-field full-width">
                 <label class="form-label" for="sppMetode">Metode Pembayaran</label>
-                <select class="form-input form-select" id="sppMetode" name="metode" required>
+                <select class="form-input form-select" id="sppMetode" name="Metode" required>
                   <option value="Transfer">Transfer</option>
                   <option value="Cash">Cash</option>
                 </select>
@@ -273,11 +273,11 @@
       button.classList.toggle("is-loading", isLoading);
 
       if (form.id === "ppdbPaymentForm") {
-        label.textContent = isLoading ? "Mengirim Pembayaran PPDB..." : "Kirim Pembayaran PPDB";
+        label.textContent = isLoading ? "Mengirim..." : "Kirim Pembayaran PPDB";
         return;
       }
 
-      label.textContent = isLoading ? "Mengirim Pembayaran SPP..." : "Kirim Pembayaran SPP";
+      label.textContent = isLoading ? "Mengirim..." : "Kirim Pembayaran SPP";
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -328,16 +328,22 @@
 
           // Build FormData from the form
           const formData = new FormData(ppdbForm);
+          
+          // Add formType identifier
+          formData.append('formType', 'pembayaran');
+          
+          // Add timestamp with exact header name
+          formData.append('Waktu', new Date().toLocaleString());
 
           try {
             await kirimPembayaran(formData);
-            alert("Pembayaran PPDB berhasil dikirim!");
+            alert("Data berhasil dikirim!");
             ppdbForm.reset();
-            ppdbForm.elements.nominal.value = "200000";
-            ppdbForm.elements.metode.value = "Transfer";
+            ppdbForm.elements.Nominal.value = "200000";
+            ppdbForm.elements.Metode.value = "Transfer";
           } catch (error) {
             console.error("Gagal mengirim pembayaran PPDB:", error);
-            alert("Terjadi kesalahan saat mengirim pembayaran. Silakan coba lagi.");
+            alert("Gagal mengirim data.");
           } finally {
             setPaymentLoading(ppdbForm, false);
           }
@@ -352,17 +358,23 @@
 
           // Build FormData from the form
           const formData = new FormData(sppForm);
+          
+          // Add formType identifier
+          formData.append('formType', 'pembayaran');
+          
+          // Add timestamp with exact header name
+          formData.append('Waktu', new Date().toLocaleString());
 
           try {
             await kirimPembayaran(formData);
-            alert("Pembayaran SPP berhasil dikirim!");
+            alert("Data berhasil dikirim!");
             sppForm.reset();
-            sppForm.elements.bulan.value = "Januari";
-            sppForm.elements.detail.value = "Januari";
-            sppForm.elements.metode.value = "Transfer";
+            sppForm.elements.Bulan.value = "Januari";
+            sppForm.elements.Detail.value = "Januari";
+            sppForm.elements.Metode.value = "Transfer";
           } catch (error) {
             console.error("Gagal mengirim pembayaran SPP:", error);
-            alert("Terjadi kesalahan saat mengirim pembayaran. Silakan coba lagi.");
+            alert("Gagal mengirim data.");
           } finally {
             setPaymentLoading(sppForm, false);
           }
