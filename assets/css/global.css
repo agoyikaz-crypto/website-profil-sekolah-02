@@ -2977,6 +2977,182 @@ body.profile-page main {
   }
 }
 
+/* PROFIL SEKOLAH STICKY BACKGROUND VIDEO */
+.profile-video-scroll {
+  position: relative;
+  min-height: 100svh;
+  overflow: visible;
+  background: #050806;
+  isolation: isolate;
+}
+
+.profile-video-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #050806;
+}
+
+.profile-bg-video {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  min-height: 100svh;
+  object-fit: cover;
+  filter: saturate(0.74) contrast(1.08) brightness(0.7);
+  transform: scale(1.035);
+}
+
+.profile-video-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 76% 20%, rgba(180, 190, 154, 0.12), transparent 28rem),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.76), rgba(7, 18, 14, 0.56) 48%, rgba(0, 0, 0, 0.66)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.52) 48%, rgba(0, 0, 0, 0.82));
+}
+
+.profile-video-content {
+  position: relative;
+  z-index: 1;
+  margin-top: -100svh;
+}
+
+.profile-video-panel {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(210, 220, 190, 0.14);
+  background: transparent;
+}
+
+.profile-video-panel:first-child {
+  border-top: 0;
+}
+
+.profile-video-scroll .page-hero {
+  background: transparent;
+}
+
+.profile-video-scroll .page-hero::after,
+.profile-video-scroll .page-hero-overlay,
+.profile-video-scroll .profile-parallax-bg {
+  display: none;
+}
+
+.profile-video-scroll .page-hero-content {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: clamp(92px, 13vh, 150px) clamp(22px, 6vw, 86px);
+}
+
+.profile-video-scroll .page-hero-panel {
+  max-width: 760px;
+  padding: clamp(28px, 4vw, 48px);
+  border: 1px solid rgba(210, 220, 190, 0.2);
+  background: rgba(5, 8, 6, 0.42);
+  backdrop-filter: blur(4px);
+}
+
+.profile-video-scroll .profile-parallax-section {
+  overflow: hidden;
+  background: transparent;
+}
+
+.profile-video-scroll .profile-parallax-section::before {
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(11, 20, 16, 0.48) 50%, rgba(0, 0, 0, 0.54)),
+    linear-gradient(180deg, rgba(5, 8, 6, 0.42), rgba(5, 8, 6, 0.78));
+}
+
+.profile-video-scroll .profile-parallax-section > :not(.profile-parallax-bg) {
+  z-index: 2;
+}
+
+.profile-video-scroll .section-heading {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.profile-video-scroll .section-title {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.profile-video-scroll .about-grid,
+.profile-video-scroll .vision-mission-grid,
+.profile-video-scroll .feature-grid {
+  width: min(1180px, 100%);
+  margin: clamp(1.5rem, 4vw, 3rem) auto 0;
+}
+
+.profile-video-scroll .card {
+  background: rgba(6, 12, 9, 0.66);
+  border: 1px solid rgba(210, 220, 190, 0.14);
+  backdrop-filter: blur(5px);
+}
+
+.profile-video-reveal {
+  opacity: 0;
+  transform: translate3d(0, 42px, 0);
+  filter: blur(8px);
+  transition:
+    opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 900ms ease;
+  will-change: opacity, transform, filter;
+}
+
+.profile-video-reveal.active,
+.profile-video-reveal.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+@media (max-width: 900px) {
+  .profile-video-sticky {
+    height: 100svh;
+  }
+
+  .profile-video-panel {
+    min-height: 100svh;
+  }
+
+  .profile-bg-video {
+    height: 100svh;
+    transform: scale(1.08);
+  }
+
+  .profile-video-scroll .page-hero-content {
+    padding: 84px 18px;
+  }
+
+  .profile-video-scroll .page-hero-panel {
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-bg-video,
+  .profile-video-reveal {
+    transform: none !important;
+  }
+
+  .profile-video-reveal {
+    opacity: 1;
+    filter: none;
+  }
+}
+
 /* FINAL HEADER CLEANUP: logo + WhatsApp left, menu centered, CTA right */
 .header {
   position: sticky;

@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initParallax();
   initStickySectionStack();
   initReveal();
+  initProfileVideoReveal();
   initPageTransitions();
 });
 
@@ -321,6 +322,38 @@ function initReveal() {
     },
     {
       threshold: 0.15
+    }
+  );
+
+  revealElements.forEach((element) => observer.observe(element));
+}
+
+function initProfileVideoReveal() {
+  const revealElements = document.querySelectorAll(".profile-video-reveal");
+
+  if (!revealElements.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    revealElements.forEach((element) => element.classList.add("active"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.22
     }
   );
 
