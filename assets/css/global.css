@@ -3492,3 +3492,32 @@ body.profile-page main {
     width: 46px;
   }
 }
+
+/* HOMEPAGE HERO VIDEO BACKGROUND */
+.hero-slider {
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.76) contrast(1.05) brightness(0.72);
+  transform: scale(1.02);
+}
+
+.hero-overlay {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(7, 18, 14, 0.58) 48%, rgba(0, 0, 0, 0.44) 100%),
+    rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  z-index: 2;
+}

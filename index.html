@@ -14,10 +14,10 @@
 
   <main>
     <section class="hero" id="home">
-      <div class="hero-slider">
-        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80');"></div>
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80');"></div>
-        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1600&q=80');"></div>
+      <div class="hero-slider" aria-hidden="true">
+        <video class="hero-video" autoplay loop muted playsinline preload="metadata">
+          <source src="./vidio mts-03.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -30,11 +30,6 @@
           <div class="hero-actions">
             <a href="./pages/profil-sekolah.html" class="btn btn-primary">Jelajahi Sekolah</a>
             <a href="./pages/ppdb.html" class="btn btn-secondary">Info PPDB</a>
-          </div>
-          <div class="hero-dots" aria-label="Navigasi slider hero">
-            <button class="hero-dot active" type="button" aria-label="Tampilkan slide 1"></button>
-            <button class="hero-dot" type="button" aria-label="Tampilkan slide 2"></button>
-            <button class="hero-dot" type="button" aria-label="Tampilkan slide 3"></button>
           </div>
         </div>
       </div>
