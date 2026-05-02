@@ -7,6 +7,8 @@ class HorizontalScrollGallery {
     this.isScrolling = false;
     this.currentSection = 0;
     this.scrollSpeed = 1.5; // Adjust for scroll speed
+    this.parallaxElements = [];
+    this.revealElements = [];
     
     if (this.wrapper && this.content && this.sections.length > 0) {
       this.init();
@@ -15,11 +17,53 @@ class HorizontalScrollGallery {
 
   init() {
     this.setupEventListeners();
+    this.setupParallax();
+    this.setupRevealAnimations();
     this.updateActiveDot(0);
     this.handleResize();
     
     // Set initial position
     this.scrollToSection(0, false);
+    
+    // Initialize museum effects
+    this.initMuseumEffects();
+  }
+
+  setupParallax() {
+    // Find parallax elements in each section
+    this.sections.forEach((section, index) => {
+      const parallaxLayers = section.querySelectorAll('.museum-parallax-layer');
+      parallaxLayers.forEach(layer => {
+        this.parallaxElements.push({
+          element: layer,
+          section: index,
+          speed: layer.classList.contains('museum-parallax-bg') ? 0.5 : 
+                layer.classList.contains('museum-parallax-mid') ? 0.7 : 1
+        });
+      });
+    });
+  }
+
+  setupRevealAnimations() {
+    // Find reveal elements
+    this.revealElements = document.querySelectorAll('.museum-reveal');
+  }
+
+  initMuseumEffects() {
+    // Add museum classes to sections
+    this.sections.forEach((section, index) => {
+      section.classList.add('museum-parallax-container');
+      
+      // Add initial states
+      if (index === 0) {
+        section.classList.add('active');
+      } else {
+        section.classList.add(index < this.currentSection ? 'prev' : 'next');
+      }
+    });
+
+    // Start reveal animations for visible elements
+    this.triggerRevealAnimations();
   }
 
   setupEventListeners() {
@@ -108,16 +152,56 @@ class HorizontalScrollGallery {
     
     this.content.style.transform = `translateX(${offset}px)`;
     
+    // Update museum section states
+    this.updateMuseumSectionStates(index);
+    
     this.updateActiveDot(index);
     
-    // Reset scrolling flag after animation
+    // Trigger reveal animations for new section
     if (animate) {
       setTimeout(() => {
+        this.triggerRevealAnimations();
         this.isScrolling = false;
       }, 800);
     } else {
+      this.triggerRevealAnimations();
       this.isScrolling = false;
     }
+  }
+
+  updateMuseumSectionStates(activeIndex) {
+    this.sections.forEach((section, index) => {
+      section.classList.remove('active', 'prev', 'next');
+      
+      if (index === activeIndex) {
+        section.classList.add('active');
+      } else if (index < activeIndex) {
+        section.classList.add('prev');
+      } else {
+        section.classList.add('next');
+      }
+    });
+  }
+
+  triggerRevealAnimations() {
+    const currentSection = this.sections[this.currentSection];
+    const revealElements = currentSection.querySelectorAll('.museum-reveal');
+    
+    revealElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add('active');
+      }, index * 100);
+    });
+  }
+
+  updateParallax() {
+    const scrollProgress = this.currentSection / (this.sections.length - 1);
+    
+    this.parallaxElements.forEach(({ element, speed }) => {
+      const translateY = scrollProgress * 50 * speed;
+      const translateX = scrollProgress * 30 * speed;
+      element.style.transform = `translate(${translateX}px, ${translateY}px) translateZ(0)`;
+    });
   }
 
   updateActiveDot(index) {
@@ -169,16 +253,84 @@ class HorizontalScrollGallery {
   }
 }
 
+// Museum UI for Profile Page
+class MuseumProfileUI {
+  constructor() {
+    this.profileContainer = document.querySelector('.profile-video-scroll');
+    this.panels = document.querySelectorAll('.profile-video-panel');
+    this.revealElements = document.querySelectorAll('.profile-reveal');
+    
+    if (this.profileContainer && this.panels.length > 0) {
+      this.init();
+    }
+  }
+
+  init() {
+    this.setupScrollEffects();
+    this.setupParallax();
+    this.triggerInitialReveals();
+  }
+
+  setupScrollEffects() {
+    let lastScrollY = 0;
+    
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const scrollDirection = scrollY > lastScrollY ? 1 : -1;
+      lastScrollY = scrollY;
+      
+      this.updateParallax(scrollY, scrollDirection);
+      this.updateReveals(scrollY);
+    });
+  }
+
+  setupParallax() {
+    this.panels.forEach((panel, index) => {
+      panel.style.transform = `translateZ(${index * -50}px)`;
+    });
+  }
+
+  updateParallax(scrollY, direction) {
+    const parallaxElements = document.querySelectorAll('.profile-parallax-bg');
+    
+    parallaxElements.forEach(element => {
+      const speed = 0.5;
+      const yPos = -(scrollY * speed);
+      element.style.transform = `translateY(${yPos}px) translateZ(-100px) scale(1.2)`;
+    });
+  }
+
+  updateReveals(scrollY) {
+    this.revealElements.forEach(element => {
+      const rect = element.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight * 0.8;
+      
+      if (isVisible) {
+        element.classList.add('active');
+      }
+    });
+  }
+
+  triggerInitialReveals() {
+    setTimeout(() => {
+      this.updateReveals(window.scrollY);
+    }, 100);
+  }
+}
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   new HorizontalScrollGallery();
+  new MuseumProfileUI();
 });
 
 // Also initialize if DOM is already loaded
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     new HorizontalScrollGallery();
+    new MuseumProfileUI();
   });
 } else {
   new HorizontalScrollGallery();
+  new MuseumProfileUI();
 }

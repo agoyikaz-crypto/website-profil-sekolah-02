@@ -1,5 +1,4 @@
-# Video files
-*.mp4
+# Video files (removed mp4 for local development)
 *.avi
 *.mov
 *.wmv
