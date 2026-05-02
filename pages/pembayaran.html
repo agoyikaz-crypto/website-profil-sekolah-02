@@ -59,6 +59,7 @@
           <p class="field-note">Gunakan formulir ini untuk pembayaran biaya pendaftaran awal sebesar Rp200.000.</p>
 
           <form class="ppdb-form" id="ppdbPaymentForm">
+            <input type="hidden" name="formType" value="pembayaran">
             <input type="hidden" name="jenis" value="PPDB">
             <input type="hidden" name="detail" value="Pendaftaran">
 
@@ -104,6 +105,7 @@
           <p class="field-note">Isi pembayaran bulanan siswa sesuai bulan tagihan dan nominal yang akan dibayarkan.</p>
 
           <form class="ppdb-form" id="sppPaymentForm">
+            <input type="hidden" name="formType" value="pembayaran">
             <input type="hidden" name="jenis" value="SPP">
             <input type="hidden" name="detail" value="Januari">
 
@@ -247,26 +249,16 @@
   <script>
     const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
 
-    async function kirimPembayaran(data) {
-      const params = new URLSearchParams();
-
-      params.append("nama", data.nama);
-      params.append("nisn", data.nisn);
-      params.append("jenis", data.jenis);
-      params.append("detail", data.detail);
-      params.append("nominal", data.nominal);
-      params.append("metode", data.metode);
+    async function kirimPembayaran(formData) {
+      console.log("PAYMENT FORM DATA:", Array.from(formData.entries()));
 
       await fetch(PPDB_ENDPOINT, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: params
+        body: formData
       });
 
-      alert("Payment submitted successfully!");
+      return { status: "success" };
     }
 
     function setPaymentLoading(form, isLoading) {
@@ -334,20 +326,18 @@
 
           setPaymentLoading(ppdbForm, true);
 
-          const data = {
-            nama: ppdbForm.elements.nama.value.trim(),
-            nisn: ppdbForm.elements.nisn.value.trim(),
-            jenis: ppdbForm.elements.jenis.value,
-            detail: ppdbForm.elements.detail.value,
-            nominal: ppdbForm.elements.nominal.value,
-            metode: ppdbForm.elements.metode.value
-          };
+          // Build FormData from the form
+          const formData = new FormData(ppdbForm);
 
           try {
-            await kirimPembayaran(data);
+            await kirimPembayaran(formData);
+            alert("Pembayaran PPDB berhasil dikirim!");
             ppdbForm.reset();
             ppdbForm.elements.nominal.value = "200000";
             ppdbForm.elements.metode.value = "Transfer";
+          } catch (error) {
+            console.error("Gagal mengirim pembayaran PPDB:", error);
+            alert("Terjadi kesalahan saat mengirim pembayaran. Silakan coba lagi.");
           } finally {
             setPaymentLoading(ppdbForm, false);
           }
@@ -360,21 +350,19 @@
 
           setPaymentLoading(sppForm, true);
 
-          const data = {
-            nama: sppForm.elements.nama.value.trim(),
-            nisn: sppForm.elements.nisn.value.trim(),
-            jenis: sppForm.elements.jenis.value,
-            detail: sppForm.elements.detail.value,
-            nominal: sppForm.elements.nominal.value,
-            metode: sppForm.elements.metode.value
-          };
+          // Build FormData from the form
+          const formData = new FormData(sppForm);
 
           try {
-            await kirimPembayaran(data);
+            await kirimPembayaran(formData);
+            alert("Pembayaran SPP berhasil dikirim!");
             sppForm.reset();
             sppForm.elements.bulan.value = "Januari";
             sppForm.elements.detail.value = "Januari";
             sppForm.elements.metode.value = "Transfer";
+          } catch (error) {
+            console.error("Gagal mengirim pembayaran SPP:", error);
+            alert("Terjadi kesalahan saat mengirim pembayaran. Silakan coba lagi.");
           } finally {
             setPaymentLoading(sppForm, false);
           }

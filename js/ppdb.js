@@ -5,28 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initPpdbForm();
 });
 
-async function submitToServer(data) {
-  const params = new URLSearchParams();
-
-  params.append("namaLengkap", data.namaLengkap || "");
-  params.append("nisn", data.nisn || "");
-  params.append("tempatLahir", data.tempatLahir || "");
-  params.append("tanggalLahir", data.tanggalLahir || "");
-  params.append("jenisKelamin", data.jenisKelamin || "");
-  params.append("alamat", data.alamat || "");
-  params.append("noHp", data.noHp || "");
-  params.append("email", data.email || "");
-  params.append("pilihanJurusan", data.pilihanJurusan || "");
-
-  console.log("FINAL PARAMS:", params.toString());
+async function submitToServer(formData) {
+  console.log("FORM DATA:", Array.from(formData.entries()));
 
   await fetch(PPDB_ENDPOINT, {
     method: "POST",
     mode: "no-cors",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: params
+    body: formData
   });
 
   return { status: "success" };
@@ -165,10 +150,12 @@ function initPpdbForm() {
 
     setLoadingState(true);
 
+    // Build FormData from the form
+    const formData = new FormData(form);
     const studentData = collectFormData();
 
     try {
-      await submitToServer(studentData);
+      await submitToServer(formData);
       renderConfirmation(studentData);
       form.reset();
       clearAllErrors();
