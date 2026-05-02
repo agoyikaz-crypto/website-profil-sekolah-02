@@ -6,12 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function submitToServer(formData) {
-  console.log("FORM DATA:", Array.from(formData.entries()));
+  // Convert FormData to URLSearchParams for Google Apps Script compatibility
+  const params = new URLSearchParams(formData);
+  
+  // Debug logging
+  console.log('Sending to Sheets:', Object.fromEntries(formData));
 
   await fetch(PPDB_ENDPOINT, {
-    method: "POST",
-    mode: "no-cors",
-    body: formData
+    method: 'POST',
+    mode: 'no-cors',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: params
   });
 
   return { status: "success" };
@@ -166,8 +174,8 @@ function initPpdbForm() {
       renderConfirmation(studentData);
       form.reset();
       clearAllErrors();
-      showToast("Data berhasil dikirim!");
-      window.alert("Data berhasil dikirim!");
+      showToast("Data sedang diproses, silakan cek Google Sheets Anda dalam beberapa saat.");
+      window.alert("Data sedang diproses, silakan cek Google Sheets Anda dalam beberapa saat.");
       window.location.hash = "konfirmasi-ppdb";
       confirmationSection.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
