@@ -49,115 +49,92 @@ img {
   width: 100%;
 }
 
-/* Horizontal Scroll Gallery Styles - Museum Tour */
-.horizontal-gallery-container {
-  position: relative;
-  height: 300vh; /* 3x viewport height for smooth scroll track */
-  overflow: hidden;
-  padding: var(--section-space) 0;
-}
-
-.horizontal-scroll-wrapper {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
-  border: none;
-}
-
-.horizontal-scroll-content {
-  display: flex;
-  height: 100vh;
-  will-change: transform; /* Performance optimization */
-}
-
-.gallery-panel {
-  flex: 0 0 100vw;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.panel-content {
-  max-width: 1200px;
-  width: 100%;
-  text-align: center;
-  z-index: 1;
-  position: relative;
-}
-
-.panel-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 700;
-  color: var(--gold);
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
-  text-shadow: 0 4px 20px rgba(214, 181, 109, 0.3);
-}
-
-.panel-description {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--muted);
-  margin-bottom: 3rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.panel-images {
+/* Gallery Grid Styles - Original Vertical Layout */
+.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  gap: 3rem;
+  margin-top: 2rem;
 }
 
-.panel-images img {
-  height: 200px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--border-soft);
-}
-
-.panel-images img:hover {
-  transform: scale(1.05);
-  box-shadow: var(--shadow-hover);
-}
-
-.panel-achievements {
+.gallery-item {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem;
-  text-align: left;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.panel-achievements h4 {
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.gallery-content {
+  padding: 2rem;
+}
+
+.gallery-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
   color: var(--gold);
-  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.gallery-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.gallery-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.gallery-images img {
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  transition: transform 0.3s ease;
+}
+
+.gallery-images img:hover {
+  transform: scale(1.05);
+}
+
+.gallery-achievements {
+  background: var(--surface-tint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.gallery-achievements h4 {
+  color: var(--gold);
+  font-size: 1.2rem;
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
-.panel-achievements ul {
+.gallery-achievements ul {
   list-style: none;
   padding: 0;
 }
 
-.panel-achievements li {
+.gallery-achievements li {
   color: var(--text);
-  margin-bottom: 0.8rem;
-  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.2rem;
   position: relative;
 }
 
-.panel-achievements li::before {
+.gallery-achievements li::before {
   content: '▸';
   position: absolute;
   left: 0;
@@ -174,19 +151,6 @@ img {
   padding: 3rem;
   position: relative;
   overflow: hidden;
-}
-
-.gallery-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at center, rgba(214, 181, 109, 0.03), transparent 60%),
-    linear-gradient(135deg, rgba(214, 181, 109, 0.02), transparent 50%);
-  pointer-events: none;
 }
 
 .gallery-section-content {
@@ -313,84 +277,34 @@ img {
   border-color: var(--gold);
 }
 
-/* Responsive Design - Museum Tour */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .horizontal-gallery-container {
-    height: 200vh; /* Reduced height for mobile */
-  }
-  
   .horizontal-scroll-wrapper {
-    height: 100vh;
+    height: 80vh;
   }
   
   .gallery-section {
     padding: 2rem 1rem;
-    flex: 0 0 100vw;
-  }
-  
-  .gallery-section-content {
-    padding: 1rem;
   }
   
   .gallery-section-title {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2rem, 6vw, 3rem);
   }
   
   .gallery-section-description {
     font-size: 1rem;
-    margin-bottom: 2rem;
   }
   
   .gallery-images {
     grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-bottom: 2rem;
   }
   
   .gallery-images img {
-    height: 120px;
+    height: 150px;
   }
   
   .gallery-achievements {
     padding: 1.5rem;
-  }
-  
-  .scroll-indicator {
-    margin-top: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .horizontal-gallery-container {
-    height: 150vh; /* Further reduced for small mobile */
-  }
-  
-  .gallery-section {
-    padding: 1rem 0.5rem;
-  }
-  
-  .gallery-section-title {
-    font-size: clamp(1.5rem, 10vw, 2.5rem);
-  }
-  
-  .gallery-section-description {
-    font-size: 0.9rem;
-  }
-  
-  .gallery-images img {
-    height: 100px;
-  }
-  
-  .gallery-achievements {
-    padding: 1rem;
-  }
-  
-  .gallery-achievements h4 {
-    font-size: 1.1rem;
-  }
-  
-  .gallery-achievements li {
-    font-size: 0.9rem;
   }
 }
 
