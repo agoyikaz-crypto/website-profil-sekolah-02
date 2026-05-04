@@ -54,7 +54,7 @@ img {
   position: relative;
   height: 300vh; /* 3x viewport height for smooth scroll track */
   overflow: hidden;
-  padding: 0;
+  padding: var(--section-space) 0;
 }
 
 .horizontal-scroll-wrapper {
@@ -69,6 +69,100 @@ img {
   display: flex;
   height: 100vh;
   will-change: transform; /* Performance optimization */
+}
+
+.gallery-panel {
+  flex: 0 0 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-content {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+.panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(214, 181, 109, 0.3);
+}
+
+.panel-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.panel-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.panel-images img {
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-soft);
+}
+
+.panel-images img:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.panel-achievements {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: left;
+}
+
+.panel-achievements h4 {
+  color: var(--gold);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.panel-achievements ul {
+  list-style: none;
+  padding: 0;
+}
+
+.panel-achievements li {
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.panel-achievements li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: bold;
 }
 
 .gallery-section {

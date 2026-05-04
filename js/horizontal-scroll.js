@@ -1,15 +1,13 @@
-class MuseumTourHorizontalScroll {
+class HorizontalScrollGallery {
   constructor() {
     this.galleryContainer = document.querySelector('.horizontal-gallery-container');
     this.scrollWrapper = document.getElementById('horizontalScrollGallery');
     this.scrollContent = this.scrollWrapper?.querySelector('.horizontal-scroll-content');
-    this.sections = this.scrollContent?.querySelectorAll('.gallery-section');
+    this.panels = this.scrollContent?.querySelectorAll('.gallery-section, .gallery-panel');
     this.dots = document.querySelectorAll('.dot');
     
-    // Performance and animation properties
-    this.isScrolling = false;
+    // Animation properties
     this.animationId = null;
-    this.lastScrollY = 0;
     this.currentTranslateX = 0;
     this.targetTranslateX = 0;
     
@@ -19,7 +17,7 @@ class MuseumTourHorizontalScroll {
     this.contentWidth = 0;
     this.maxScroll = 0;
     
-    if (this.galleryContainer && this.scrollWrapper && this.scrollContent && this.sections.length > 0) {
+    if (this.galleryContainer && this.scrollWrapper && this.scrollContent && this.panels.length > 0) {
       this.init();
     }
   }
@@ -29,15 +27,13 @@ class MuseumTourHorizontalScroll {
     this.setupEventListeners();
     this.startAnimationLoop();
     this.updateActiveDot(0);
-    
-    // Initial position
     this.updateScrollPosition();
   }
 
   setupDimensions() {
     this.viewportHeight = window.innerHeight;
     this.galleryHeight = this.galleryContainer.offsetHeight;
-    this.contentWidth = Array.from(this.sections).reduce((total, section) => total + section.offsetWidth, 0);
+    this.contentWidth = Array.from(this.panels).reduce((total, panel) => total + panel.offsetWidth, 0);
     this.maxScroll = this.galleryHeight - this.viewportHeight;
   }
 
@@ -62,29 +58,11 @@ class MuseumTourHorizontalScroll {
     
     // Dot navigation
     this.dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => this.scrollToSection(index));
+      dot.addEventListener('click', () => this.scrollToPanel(index));
     });
-    
-    // Touch events for mobile
-    this.setupTouchEvents();
-  }
-
-  setupTouchEvents() {
-    let touchStartY = 0;
-    let touchEndY = 0;
-    
-    this.scrollWrapper.addEventListener('touchstart', (e) => {
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-    
-    this.scrollWrapper.addEventListener('touchend', (e) => {
-      touchEndY = e.changedTouches[0].screenY;
-      this.handleTouchSwipe(touchStartY, touchEndY);
-    }, { passive: true });
   }
 
   handleScroll() {
-    const scrollY = window.scrollY;
     const containerRect = this.galleryContainer.getBoundingClientRect();
     
     // Check if gallery is in view
@@ -99,37 +77,12 @@ class MuseumTourHorizontalScroll {
       // Update active dot based on scroll progress
       this.updateActiveDotFromProgress(scrollProgress);
     }
-    
-    this.lastScrollY = scrollY;
-  }
-
-  handleTouchSwipe(startY, endY) {
-    const swipeThreshold = 50;
-    const diff = startY - endY;
-    
-    if (Math.abs(diff) > swipeThreshold) {
-      const direction = diff > 0 ? 1 : -1; // Swipe up = next, Swipe down = prev
-      const currentSection = this.getCurrentSectionIndex();
-      const nextSection = Math.max(0, Math.min(this.sections.length - 1, currentSection + direction));
-      
-      this.scrollToSection(nextSection);
-    }
-  }
-
-  getCurrentSectionIndex() {
-    const containerRect = this.galleryContainer.getBoundingClientRect();
-    if (containerRect.top <= 0 && containerRect.bottom >= 0) {
-      const galleryScrollTop = Math.max(0, -containerRect.top);
-      const scrollProgress = Math.min(1, galleryScrollTop / this.maxScroll);
-      return Math.round(scrollProgress * (this.sections.length - 1));
-    }
-    return 0;
   }
 
   startAnimationLoop() {
     const animate = () => {
       // Smooth interpolation for fluid movement
-      const easing = 0.08; // Adjust for smoother/less smooth animation
+      const easing = 0.08;
       const diff = this.targetTranslateX - this.currentTranslateX;
       this.currentTranslateX += diff * easing;
       
@@ -143,12 +96,12 @@ class MuseumTourHorizontalScroll {
     animate();
   }
 
-  scrollToSection(index) {
-    if (index < 0 || index >= this.sections.length) return;
+  scrollToPanel(index) {
+    if (index < 0 || index >= this.panels.length) return;
     
-    // Calculate the scroll position needed to center this section
-    const sectionProgress = index / (this.sections.length - 1);
-    const targetScrollTop = sectionProgress * this.maxScroll;
+    // Calculate the scroll position needed to center this panel
+    const panelProgress = index / (this.panels.length - 1);
+    const targetScrollTop = panelProgress * this.maxScroll;
     
     // Get current scroll position relative to gallery
     const containerRect = this.galleryContainer.getBoundingClientRect();
@@ -166,8 +119,8 @@ class MuseumTourHorizontalScroll {
   }
 
   updateActiveDotFromProgress(progress) {
-    const sectionIndex = Math.round(progress * (this.sections.length - 1));
-    this.updateActiveDot(sectionIndex);
+    const panelIndex = Math.round(progress * (this.panels.length - 1));
+    this.updateActiveDot(panelIndex);
   }
 
   updateActiveDot(index) {
@@ -205,14 +158,14 @@ class MuseumTourHorizontalScroll {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  new MuseumTourHorizontalScroll();
+  new HorizontalScrollGallery();
 });
 
 // Also initialize if DOM is already loaded
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    new MuseumTourHorizontalScroll();
+    new HorizontalScrollGallery();
   });
 } else {
-  new MuseumTourHorizontalScroll();
+  new HorizontalScrollGallery();
 }
