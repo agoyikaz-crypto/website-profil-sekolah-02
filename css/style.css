@@ -49,27 +49,26 @@ img {
   width: 100%;
 }
 
-/* Horizontal Scroll Gallery Styles */
+/* Horizontal Scroll Gallery Styles - Museum Tour */
 .horizontal-gallery-container {
   position: relative;
+  height: 300vh; /* 3x viewport height for smooth scroll track */
   overflow: hidden;
-  padding: var(--section-space) 0;
+  padding: 0;
 }
 
 .horizontal-scroll-wrapper {
-  position: relative;
-  height: 70vh;
+  position: sticky;
+  top: 0;
+  height: 100vh;
   overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--surface-strong);
-  border: 1px solid var(--border);
+  border: none;
 }
 
 .horizontal-scroll-content {
   display: flex;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
+  height: 100vh;
+  will-change: transform; /* Performance optimization */
 }
 
 .gallery-section {
@@ -220,34 +219,84 @@ img {
   border-color: var(--gold);
 }
 
-/* Responsive Design */
+/* Responsive Design - Museum Tour */
 @media (max-width: 768px) {
+  .horizontal-gallery-container {
+    height: 200vh; /* Reduced height for mobile */
+  }
+  
   .horizontal-scroll-wrapper {
-    height: 80vh;
+    height: 100vh;
   }
   
   .gallery-section {
     padding: 2rem 1rem;
+    flex: 0 0 100vw;
+  }
+  
+  .gallery-section-content {
+    padding: 1rem;
   }
   
   .gallery-section-title {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2rem, 8vw, 3rem);
   }
   
   .gallery-section-description {
     font-size: 1rem;
+    margin-bottom: 2rem;
   }
   
   .gallery-images {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
   
   .gallery-images img {
-    height: 150px;
+    height: 120px;
   }
   
   .gallery-achievements {
     padding: 1.5rem;
+  }
+  
+  .scroll-indicator {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .horizontal-gallery-container {
+    height: 150vh; /* Further reduced for small mobile */
+  }
+  
+  .gallery-section {
+    padding: 1rem 0.5rem;
+  }
+  
+  .gallery-section-title {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+  }
+  
+  .gallery-section-description {
+    font-size: 0.9rem;
+  }
+  
+  .gallery-images img {
+    height: 100px;
+  }
+  
+  .gallery-achievements {
+    padding: 1rem;
+  }
+  
+  .gallery-achievements h4 {
+    font-size: 1.1rem;
+  }
+  
+  .gallery-achievements li {
+    font-size: 0.9rem;
   }
 }
 
