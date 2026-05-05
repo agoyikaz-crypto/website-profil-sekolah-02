@@ -247,54 +247,49 @@
   <div data-include="footer"></div>
   <script src="../js/app.js"></script>
   <script>
-    const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
+    const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec?v=2";
 
     async function kirimPembayaran(formData) {
       // Convert FormData to URLSearchParams for Google Apps Script compatibility
       const params = new URLSearchParams(formData);
       
       // Debug logging
+      console.log('Endpoint:', PPDB_ENDPOINT);
       console.log('Sending to Sheets:', Object.fromEntries(formData));
       console.log('URLSearchParams string:', params.toString());
-      console.log('Endpoint:', PPDB_ENDPOINT);
 
       try {
-        const response = await fetch(PPDB_ENDPOINT, {
+        const res = await fetch(PPDB_ENDPOINT, {
           method: 'POST',
-          mode: 'cors', // Remove no-cors to allow proper response handling
-          cache: 'no-cache',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
-          body: params
+          body: new URLSearchParams(formData)
         });
 
-        console.log('Response raw:', response);
-        console.log('Response status:', response.status);
-        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-        console.log('Content-Type:', response.headers.get('content-type'));
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const text = await res.text();
+        console.log("RAW RESPONSE:", text);
+        
+        // Hard error detection for old backend
+        if (text.includes("Sheet tidak ditemukan")) {
+          throw new Error("Old backend is still being used. Wrong deployment URL.");
         }
-
-        // Check if response is actually JSON
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          const text = await response.text();
-          console.error('Non-JSON response received:', text);
-          throw new Error('Server returned non-JSON response: ' + text.substring(0, 100));
+        
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          throw new Error("Response is NOT JSON: " + text);
         }
-
-        const result = await response.json();
-        console.log('Parsed JSON response:', result);
+        
+        console.log("PARSED JSON:", data);
         
         // Check if server returned an error
-        if (result.status === 'error') {
-          throw new Error(result.message || 'Server returned an error');
+        if (data.status === 'error') {
+          throw new Error(data.message || 'Server returned an error');
         }
         
-        return result;
+        return data;
       } catch (error) {
         console.error('Fetch error:', error);
         console.error('Error details:', error.message);
