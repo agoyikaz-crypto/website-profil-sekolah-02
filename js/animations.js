@@ -2,20 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // REGISTER GSAP SCROLLTRIGGER PLUGIN
   gsap.registerPlugin(ScrollTrigger);
 
-  // LENIS SMOOTH SCROLL
-  if (typeof Lenis === "undefined") {
-    console.error("Lenis not loaded");
-    return;
-  }
-  
-  const lenis = new Lenis();
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
   // GSAP ANIMATIONS
   gsap.utils.toArray(".section, .card, .feature-card, .news-card").forEach((el) => {
     gsap.from(el, {
