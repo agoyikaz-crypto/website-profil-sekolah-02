@@ -255,18 +255,33 @@
       
       // Debug logging
       console.log('Sending to Sheets:', Object.fromEntries(formData));
+      console.log('URLSearchParams string:', params.toString());
 
-      await fetch(PPDB_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: params
-      });
+      try {
+        const response = await fetch(PPDB_ENDPOINT, {
+          method: 'POST',
+          mode: 'cors', // Remove no-cors to allow proper response handling
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: params
+        });
 
-      return { status: "success" };
+        console.log('Response status:', response.status);
+        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Server response:', result);
+        return result;
+      } catch (error) {
+        console.error('Fetch error:', error);
+        throw error;
+      }
     }
 
     function setPaymentLoading(form, isLoading) {
@@ -344,14 +359,14 @@
           formData.append('Waktu', new Date().toLocaleString());
 
           try {
-            await kirimPembayaran(formData);
-            alert("Data sedang diproses, silakan cek Google Sheets Anda dalam beberapa saat.");
+            const result = await kirimPembayaran(formData);
+            alert("Pembayaran PPDB berhasil dikirim ke Google Sheets!");
             ppdbForm.reset();
             ppdbForm.elements.Nominal.value = "200000";
             ppdbForm.elements.Metode.value = "Transfer";
           } catch (error) {
             console.error("Gagal mengirim pembayaran PPDB:", error);
-            alert("Gagal mengirim data.");
+            alert("Gagal mengirim pembayaran: " + error.message);
           } finally {
             setPaymentLoading(ppdbForm, false);
           }
@@ -374,15 +389,15 @@
           formData.append('Waktu', new Date().toLocaleString());
 
           try {
-            await kirimPembayaran(formData);
-            alert("Data sedang diproses, silakan cek Google Sheets Anda dalam beberapa saat.");
+            const result = await kirimPembayaran(formData);
+            alert("Pembayaran SPP berhasil dikirim ke Google Sheets!");
             sppForm.reset();
             sppForm.elements.Bulan.value = "Januari";
             sppForm.elements.Detail.value = "Januari";
             sppForm.elements.Metode.value = "Transfer";
           } catch (error) {
             console.error("Gagal mengirim pembayaran SPP:", error);
-            alert("Gagal mengirim data.");
+            alert("Gagal mengirim pembayaran: " + error.message);
           } finally {
             setPaymentLoading(sppForm, false);
           }

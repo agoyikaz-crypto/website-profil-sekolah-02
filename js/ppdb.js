@@ -11,18 +11,33 @@ async function submitToServer(formData) {
   
   // Debug logging
   console.log('Sending to Sheets:', Object.fromEntries(formData));
+  console.log('URLSearchParams string:', params.toString());
 
-  await fetch(PPDB_ENDPOINT, {
-    method: 'POST',
-    mode: 'no-cors',
-    cache: 'no-cache',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: params
-  });
+  try {
+    const response = await fetch(PPDB_ENDPOINT, {
+      method: 'POST',
+      mode: 'cors', // Remove no-cors to allow proper response handling
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: params
+    });
 
-  return { status: "success" };
+    console.log('Response status:', response.status);
+    console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Server response:', result);
+    return result;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error;
+  }
 }
 
 function buildServerPayload(data) {
@@ -170,19 +185,19 @@ function initPpdbForm() {
     const studentData = collectFormData();
 
     try {
-      await submitToServer(formData);
+      const result = await submitToServer(formData);
       renderConfirmation(studentData);
       form.reset();
       clearAllErrors();
-      showToast("Data sedang diproses, silakan cek Google Sheets Anda dalam beberapa saat.");
-      window.alert("Data sedang diproses, silakan cek Google Sheets Anda dalam beberapa saat.");
+      showToast("Data berhasil dikirim ke Google Sheets!");
+      window.alert("Data berhasil dikirim ke Google Sheets!");
       window.location.hash = "konfirmasi-ppdb";
       confirmationSection.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       console.error("Gagal mengirim data PPDB ke server:", error);
       saveBackupToLocalStorage(studentData);
-      showToast("Gagal mengirim data.");
-      window.alert("Gagal mengirim data.");
+      showToast("Gagal mengirim data: " + error.message);
+      window.alert("Gagal mengirim data: " + error.message);
     } finally {
       setLoadingState(false);
     }
