@@ -1,5 +1,6 @@
 // Google Apps Script Backend for PPDB and Payment Forms
 // Deployment: Web App, Execute as: Me, Who has access: Anyone
+// ALL RESPONSES RETURN VALID JSON ONLY
 
 function doGet(e) {
   return handleRequest(e, 'GET');
@@ -20,6 +21,10 @@ function handleRequest(e, method) {
     // Get form type to determine which sheet to use
     const formType = e.parameter.formType || e.parameters.formType || '';
     Logger.log('Form Type: ' + formType);
+    
+    if (!formType) {
+      throw new Error('formType is required');
+    }
     
     let result;
     if (formType === 'ppdb') {
@@ -52,99 +57,128 @@ function handleRequest(e, method) {
 
 function handlePPDBSubmission(e) {
   const sheetName = 'PPDB';
-  const sheet = getOrCreateSheet(sheetName);
+  Logger.log('Handling PPDB submission');
   
-  // Set headers if sheet is new
-  if (sheet.getLastRow() === 0) {
-    const headers = [
-      'formType',
-      'Nama Lengkap',
-      'NISN', 
-      'Tempat Lahir',
-      'Tanggal Lahir',
-      'Jenis Kelamin',
-      'No HP',
-      'Email',
-      'Jurusan',
-      'Alamat',
-      'uploadFoto',
-      'Waktu pendaftaran'
-    ];
-    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-    Logger.log('Created headers for PPDB sheet');
+  try {
+    const sheet = getOrCreateSheet(sheetName);
+    Logger.log('Sheet retrieved/created: ' + sheetName);
+    
+    // Set headers if sheet is new
+    if (sheet.getLastRow() === 0) {
+      const headers = [
+        'formType',
+        'Nama Lengkap',
+        'NISN', 
+        'Tempat Lahir',
+        'Tanggal Lahir',
+        'Jenis Kelamin',
+        'No HP',
+        'Email',
+        'Jurusan',
+        'Alamat',
+        'uploadFoto',
+        'Waktu pendaftaran'
+      ];
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      Logger.log('Created headers for PPDB sheet: ' + JSON.stringify(headers));
+    }
+    
+    // Get headers from first row
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    Logger.log('Sheet headers: ' + JSON.stringify(headers));
+    
+    // Map form data to columns - handle both parameter and parameters
+    const newRow = headers.map(header => {
+      let value = '';
+      if (e.parameter[header]) {
+        value = e.parameter[header];
+      } else if (e.parameters[header]) {
+        value = e.parameters[header] instanceof Array ? e.parameters[header][0] : e.parameters[header];
+      }
+      Logger.log('Mapping header "' + header + '" to value: "' + value + '"');
+      return value;
+    });
+    
+    // Add the new row
+    sheet.appendRow(newRow);
+    Logger.log('Added new row to PPDB sheet');
+    
+    return {
+      status: 'success',
+      message: 'PPDB data saved successfully',
+      sheet: sheetName,
+      rowCount: sheet.getLastRow(),
+      timestamp: new Date().toISOString()
+    };
+    
+  } catch (error) {
+    Logger.log('Error in handlePPDBSubmission: ' + error.toString());
+    throw error;
   }
-  
-  // Get headers from first row
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  Logger.log('Sheet headers: ' + JSON.stringify(headers));
-  
-  // Map form data to columns
-  const newRow = headers.map(header => {
-    const value = e.parameter[header] || e.parameters[header] || '';
-    Logger.log('Mapping header "' + header + '" to value: "' + value + '"');
-    return value;
-  });
-  
-  // Add the new row
-  sheet.appendRow(newRow);
-  Logger.log('Added new row to PPDB sheet');
-  
-  return {
-    status: 'success',
-    message: 'PPDB data saved successfully',
-    sheet: sheetName,
-    rowCount: sheet.getLastRow(),
-    timestamp: new Date().toISOString()
-  };
 }
 
 function handlePaymentSubmission(e) {
   const sheetName = 'Pembayaran';
-  const sheet = getOrCreateSheet(sheetName);
+  Logger.log('Handling Payment submission');
   
-  // Set headers if sheet is new
-  if (sheet.getLastRow() === 0) {
-    const headers = [
-      'formType',
-      'Jenis Pembayaran',
-      'Detail',
-      'Nama',
-      'NISN',
-      'Nominal',
-      'Metode',
-      'Bulan',
-      'Waktu'
-    ];
-    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-    Logger.log('Created headers for Pembayaran sheet');
+  try {
+    const sheet = getOrCreateSheet(sheetName);
+    Logger.log('Sheet retrieved/created: ' + sheetName);
+    
+    // Set headers if sheet is new
+    if (sheet.getLastRow() === 0) {
+      const headers = [
+        'formType',
+        'Jenis Pembayaran',
+        'Detail',
+        'Nama',
+        'NISN',
+        'Nominal',
+        'Metode',
+        'Bulan',
+        'Waktu'
+      ];
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      Logger.log('Created headers for Pembayaran sheet: ' + JSON.stringify(headers));
+    }
+    
+    // Get headers from first row
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    Logger.log('Sheet headers: ' + JSON.stringify(headers));
+    
+    // Map form data to columns - handle both parameter and parameters
+    const newRow = headers.map(header => {
+      let value = '';
+      if (e.parameter[header]) {
+        value = e.parameter[header];
+      } else if (e.parameters[header]) {
+        value = e.parameters[header] instanceof Array ? e.parameters[header][0] : e.parameters[header];
+      }
+      Logger.log('Mapping header "' + header + '" to value: "' + value + '"');
+      return value;
+    });
+    
+    // Add the new row
+    sheet.appendRow(newRow);
+    Logger.log('Added new row to Pembayaran sheet');
+    
+    return {
+      status: 'success',
+      message: 'Payment data saved successfully',
+      sheet: sheetName,
+      rowCount: sheet.getLastRow(),
+      timestamp: new Date().toISOString()
+    };
+    
+  } catch (error) {
+    Logger.log('Error in handlePaymentSubmission: ' + error.toString());
+    throw error;
   }
-  
-  // Get headers from first row
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  Logger.log('Sheet headers: ' + JSON.stringify(headers));
-  
-  // Map form data to columns
-  const newRow = headers.map(header => {
-    const value = e.parameter[header] || e.parameters[header] || '';
-    Logger.log('Mapping header "' + header + '" to value: "' + value + '"');
-    return value;
-  });
-  
-  // Add the new row
-  sheet.appendRow(newRow);
-  Logger.log('Added new row to Pembayaran sheet');
-  
-  return {
-    status: 'success',
-    message: 'Payment data saved successfully',
-    sheet: sheetName,
-    rowCount: sheet.getLastRow(),
-    timestamp: new Date().toISOString()
-  };
 }
 
 function getOrCreateSheet(sheetName) {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log('Getting or creating sheet: ' + sheetName);
   
   try {
     const sheet = spreadsheet.getSheetByName(sheetName);
@@ -157,9 +191,14 @@ function getOrCreateSheet(sheetName) {
   }
   
   // Create new sheet if it doesn't exist
-  const newSheet = spreadsheet.insertSheet(sheetName);
-  Logger.log('Created new sheet: ' + sheetName);
-  return newSheet;
+  try {
+    const newSheet = spreadsheet.insertSheet(sheetName);
+    Logger.log('Created new sheet: ' + sheetName);
+    return newSheet;
+  } catch (error) {
+    Logger.log('Error creating sheet: ' + error.toString());
+    throw new Error('Failed to create sheet ' + sheetName + ': ' + error.toString());
+  }
 }
 
 // Test function for debugging

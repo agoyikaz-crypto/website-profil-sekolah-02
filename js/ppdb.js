@@ -33,6 +33,12 @@ async function submitToServer(formData) {
 
     const result = await response.json();
     console.log('Server response:', result);
+    
+    // Check if server returned an error
+    if (result.status === 'error') {
+      throw new Error(result.message || 'Server returned an error');
+    }
+    
     return result;
   } catch (error) {
     console.error('Fetch error:', error);
