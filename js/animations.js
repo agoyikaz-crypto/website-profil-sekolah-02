@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger);
 
   // LENIS SMOOTH SCROLL
+  if (typeof Lenis === "undefined") {
+    console.error("Lenis not loaded");
+    return;
+  }
+  
   const lenis = new Lenis();
 
   function raf(time) {
