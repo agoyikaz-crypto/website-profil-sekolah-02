@@ -1,31 +1,27 @@
 :root {
-  /* New Color Palette */
-  --primary: #D4C4A8;  /* Akaroa - warm soft beige */
-  --secondary: #6B8F71;  /* Sage Green - calm and modern */
-  --dark: #1F2A24;  /* Deep green-black */
-  --light: #F7F3EC;  /* Soft off-white */
-  --accent: #A3B18A;  /* Optional accent for hover */
+  /* GLOBAL COLOR SYSTEM - STRICT */
+  --bg-main: #F7F3EC;      /* Main background - soft off-white */
+  --bg-section: #D4C4A8;    /* Section background - Akaroa */
+  --accent-primary: #6B8F71;  /* Primary accent - Sage Green */
+  --accent-hover: #A3B18A;    /* Hover accent - lighter green */
+  --text-main: #1F2A24;      /* Main text - dark green-black */
+  --text-white: #FFFFFF;       /* White text for buttons */
+  --border-soft: rgba(212, 196, 168, 0.28);  /* Soft borders */
+  --shadow-soft: 0 8px 24px rgba(31, 42, 36, 0.08);  /* Soft shadows */
   
-  /* Derived colors */
-  --primary-soft: rgba(212, 196, 168, 0.18);
-  --secondary-soft: rgba(107, 143, 113, 0.18);
-  --accent-soft: rgba(163, 177, 138, 0.18);
-  --text: var(--dark);
-  --muted: var(--accent);
-  --border: rgba(212, 196, 168, 0.28);
-  --white: var(--light);
-  --surface: rgba(212, 196, 168, 0.92);
-  --surface-strong: var(--primary);
-  --surface-tint: rgba(212, 196, 168, 0.08);
-  --border-strong: rgba(212, 196, 168, 0.38);
-  
-  /* Updated shadows for softer look */
-  --shadow: 0 24px 60px rgba(31, 42, 36, 0.15);
-  --shadow-soft: 0 18px 44px rgba(31, 42, 36, 0.10);
-  --shadow-card: 0 28px 70px rgba(31, 42, 36, 0.12);
-  --shadow-hover: 0 32px 78px rgba(31, 42, 36, 0.18);
-  
-  /* Existing variables */
+  /* Legacy variables for compatibility */
+  --primary: var(--bg-section);
+  --secondary: var(--accent-primary);
+  --dark: var(--text-main);
+  --light: var(--bg-main);
+  --accent: var(--accent-hover);
+  --text: var(--text-main);
+  --white: var(--text-white);
+  --border: var(--border-soft);
+  --shadow: var(--shadow-soft);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--shadow-soft);
+  --shadow-hover: 0 12px 24px rgba(107, 143, 113, 0.20);
   --radius: 8px;
   --section-space: clamp(4.5rem, 7vw, 6.5rem);
 }
@@ -40,35 +36,37 @@ html {
   scroll-behavior: smooth;
 }
 
+/* GLOBAL LIGHT THEME SYSTEM */
 body {
-  color: #1F2A24 !important;
-  background: #F7F3EC !important;
+  color: var(--text-main) !important;
+  background: var(--bg-main) !important;
   line-height: 1.7;
 }
 
-/* FORCE LIGHT THEME - OVERRIDE ALL DARK BACKGROUNDS */
+/* FORCE ALL TEXT TO BE DARK AND READABLE */
 * {
-  box-shadow: none !important;
+  color: var(--text-main) !important;
+  opacity: 1 !important;
 }
 
-/* FORCE SOLID TEXT - REMOVE TRANSPARENCY */
 h1, h2, h3, h4, h5, h6 {
-  color: #1F2A24 !important;
+  color: var(--text-main) !important;
   opacity: 1 !important;
   text-shadow: none !important;
 }
 
 p, span, div, li, a {
-  color: #1F2A24 !important;
+  color: var(--text-main) !important;
   opacity: 1 !important;
 }
 
+/* FORCE LIGHT BACKGROUNDS */
 section, .section, .about, .vision-mission, .news, .gallery, .contact-section {
-  background: #F7F3EC !important;
+  background: var(--bg-main) !important;
 }
 
 .vision-mission, .gallery {
-  background: #D4C4A8 !important;
+  background: var(--bg-section) !important;
 }
 
 img {
@@ -865,20 +863,20 @@ ul {
   transform: translateY(-2px);
 }
 
-/* FORCE BUTTON COLORS WITH SOLID TEXT */
+/* BUTTONS WITH CORRECT COLORS */
 .btn-primary {
-  color: #FFFFFF !important;
-  background: #6B8F71 !important;
-  box-shadow: 0 8px 20px rgba(107, 143, 113, 0.15);
+  color: var(--text-white) !important;
+  background: var(--accent-primary) !important;
+  box-shadow: var(--shadow-soft);
   border-radius: 12px;
   transition: all 0.3s ease;
   opacity: 1 !important;
 }
 
 .btn-primary:hover {
-  background: #A3B18A !important;
+  background: var(--accent-hover) !important;
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(107, 143, 113, 0.20);
+  box-shadow: var(--shadow-hover);
   opacity: 1 !important;
 }
 
@@ -1271,19 +1269,24 @@ ul {
 
 .form-input {
   width: 100%;
-  padding: 0.95rem 1rem;
+  padding: 1rem 1.25rem;
   border-radius: 16px;
-  border: 1px solid rgba(12, 77, 162, 0.14);
-  background: rgba(255, 255, 255, 0.98);
-  color: var(--text);
+  border: 1px solid var(--border-soft);
+  background: #FFFFFF !important;
+  color: var(--text-main) !important;
   font: inherit;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .form-input:focus {
   outline: none;
-  border-color: rgba(47, 133, 255, 0.75);
-  box-shadow: 0 0 0 4px rgba(47, 133, 255, 0.16);
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 4px rgba(107, 143, 113, 0.16);
+}
+
+.form-input::placeholder {
+  color: #666666 !important;
+  opacity: 1 !important;
 }
 
 .form-select {
@@ -1474,9 +1477,10 @@ ul {
   max-width: 620px;
 }
 
+/* FOOTER LIGHT THEME */
 .footer {
-  background: linear-gradient(180deg, var(--dark) 0%, rgba(31, 42, 36, 0.95) 100%);
-  color: var(--light);
+  background: var(--bg-section) !important;
+  color: var(--text-main) !important;
   margin-top: 3rem;
   box-shadow: 0 -12px 35px rgba(31, 42, 36, 0.12);
 }
@@ -1490,9 +1494,10 @@ ul {
   gap: 1.5rem;
 }
 
+/* FOOTER TEXT COLORS */
 .footer h3,
 .footer h4 {
-  color: var(--secondary);
+  color: var(--text-main) !important;
   margin-bottom: 0.5rem;
 }
 
@@ -1502,13 +1507,13 @@ ul {
 }
 
 .footer-links li a {
-  color: var(--light);
+  color: var(--text-main) !important;
   opacity: 0.88;
 }
 
 .footer-links li a:hover,
 .footer-links li a:focus-visible {
-  color: var(--secondary);
+  color: var(--accent-primary) !important;
   opacity: 1;
 }
 
