@@ -41,9 +41,22 @@ html {
 }
 
 body {
-  color: #1F2A24;
-  background: #F7F3EC;
+  color: #1F2A24 !important;
+  background: #F7F3EC !important;
   line-height: 1.7;
+}
+
+/* FORCE LIGHT THEME - OVERRIDE ALL DARK BACKGROUNDS */
+* {
+  box-shadow: none !important;
+}
+
+section, .section, .about, .vision-mission, .news, .gallery, .contact-section {
+  background: #F7F3EC !important;
+}
+
+.vision-mission, .gallery {
+  background: #D4C4A8 !important;
 }
 
 img {
@@ -480,18 +493,14 @@ img {
   transform-style: preserve-3d;
 }
 
+/* REMOVE DARK OVERLAYS */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(31, 42, 36, 0.05) 0%,
-    rgba(31, 42, 36, 0.08) 50%,
-    rgba(31, 42, 36, 0.12) 100%
-  );
+  background: transparent !important;
   pointer-events: none;
 }
 
@@ -567,19 +576,20 @@ ul {
   list-style: none;
 }
 
+/* FORCE LIGHT NAVBAR */
 .header {
   position: sticky;
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(14px);
-  background: #D4C4A8;
+  background: #D4C4A8 !important;
   border-bottom: 1px solid rgba(107, 143, 113, 0.14);
   box-shadow: 0 10px 30px rgba(31, 42, 36, 0.08);
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .header.scrolled {
-  background: #D4C4A8;
+  background: #D4C4A8 !important;
   border-bottom-color: rgba(107, 143, 113, 0.28);
   box-shadow: 0 16px 36px rgba(31, 42, 36, 0.12);
 }
@@ -719,12 +729,12 @@ ul {
   transform: scale(1);
 }
 
+/* REMOVE ALL DARK OVERLAYS */
 .hero-overlay,
 .page-hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(120deg, rgba(212, 196, 168, 0.2) 10%, rgba(212, 196, 168, 0.15) 58%, rgba(107, 143, 113, 0.1) 100%);
+  background: transparent !important;
 }
 
 .hero-content,
@@ -778,7 +788,7 @@ ul {
 .hero-text {
   max-width: 620px;
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: #FFFFFF !important;
 }
 
 .hero-actions {
@@ -825,16 +835,17 @@ ul {
   transform: translateY(-2px);
 }
 
+/* FORCE BUTTON COLORS */
 .btn-primary {
-  color: #FFFFFF;
-  background: #6B8F71;
+  color: #FFFFFF !important;
+  background: #6B8F71 !important;
   box-shadow: 0 18px 28px rgba(107, 143, 113, 0.24);
   border-radius: 12px;
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: #A3B18A;
+  background: #A3B18A !important;
   transform: translateY(-2px);
   box-shadow: 0 22px 32px rgba(107, 143, 113, 0.32);
 }
@@ -939,6 +950,7 @@ ul {
   align-items: stretch;
 }
 
+/* FORCE ALL CARDS TO LIGHT BACKGROUND */
 .about-card,
 .stats-card,
 .info-panel,
@@ -948,7 +960,7 @@ ul {
 .contact-card,
 .map-card,
 .cta-band {
-  background: #F7F3EC;
+  background: #F7F3EC !important;
   border: 1px solid rgba(212, 196, 168, 0.28);
   box-shadow: 0 18px 44px rgba(31, 42, 36, 0.10);
   border-radius: 12px;
