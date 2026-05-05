@@ -51,6 +51,18 @@ body {
   box-shadow: none !important;
 }
 
+/* FORCE SOLID TEXT - REMOVE TRANSPARENCY */
+h1, h2, h3, h4, h5, h6 {
+  color: #1F2A24 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+p, span, div, li, a {
+  color: #1F2A24 !important;
+  opacity: 1 !important;
+}
+
 section, .section, .about, .vision-mission, .news, .gallery, .contact-section {
   background: #F7F3EC !important;
 }
@@ -576,7 +588,7 @@ ul {
   list-style: none;
 }
 
-/* FORCE LIGHT NAVBAR */
+/* FORCE LIGHT NAVBAR WITH DARK TEXT */
 .header {
   position: sticky;
   top: 0;
@@ -592,6 +604,24 @@ ul {
   background: #D4C4A8 !important;
   border-bottom-color: rgba(107, 143, 113, 0.28);
   box-shadow: 0 16px 36px rgba(31, 42, 36, 0.12);
+}
+
+/* FORCE NAVBAR TEXT TO BE DARK AND READABLE */
+.nav-links a {
+  color: #1F2A24 !important;
+  opacity: 1 !important;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a.active {
+  color: #6B8F71 !important;
+  opacity: 1 !important;
+}
+
+.logo-text {
+  color: #1F2A24 !important;
+  opacity: 1 !important;
 }
 
 .navbar {
@@ -705,7 +735,7 @@ ul {
   display: flex;
   align-items: center;
   background:
-    linear-gradient(120deg, rgba(212, 196, 168, 0.3) 10%, rgba(212, 196, 168, 0.2) 55%, rgba(107, 143, 113, 0.15) 100%),
+    linear-gradient(120deg, rgba(212, 196, 168, 0.15) 10%, rgba(212, 196, 168, 0.1) 55%, rgba(107, 143, 113, 0.05) 100%),
     url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80") center / cover;
 }
 
@@ -835,19 +865,21 @@ ul {
   transform: translateY(-2px);
 }
 
-/* FORCE BUTTON COLORS */
+/* FORCE BUTTON COLORS WITH SOLID TEXT */
 .btn-primary {
   color: #FFFFFF !important;
   background: #6B8F71 !important;
-  box-shadow: 0 18px 28px rgba(107, 143, 113, 0.24);
+  box-shadow: 0 8px 20px rgba(107, 143, 113, 0.15);
   border-radius: 12px;
   transition: all 0.3s ease;
+  opacity: 1 !important;
 }
 
 .btn-primary:hover {
   background: #A3B18A !important;
   transform: translateY(-2px);
-  box-shadow: 0 22px 32px rgba(107, 143, 113, 0.32);
+  box-shadow: 0 12px 24px rgba(107, 143, 113, 0.20);
+  opacity: 1 !important;
 }
 
 .btn-secondary {
@@ -950,7 +982,7 @@ ul {
   align-items: stretch;
 }
 
-/* FORCE ALL CARDS TO LIGHT BACKGROUND */
+/* FORCE ALL CARDS TO LIGHT BACKGROUND WITH SOFT SHADOWS */
 .about-card,
 .stats-card,
 .info-panel,
@@ -962,7 +994,7 @@ ul {
 .cta-band {
   background: #F7F3EC !important;
   border: 1px solid rgba(212, 196, 168, 0.28);
-  box-shadow: 0 18px 44px rgba(31, 42, 36, 0.10);
+  box-shadow: 0 8px 24px rgba(31, 42, 36, 0.08);
   border-radius: 12px;
   transition: all 0.3s ease;
 }
