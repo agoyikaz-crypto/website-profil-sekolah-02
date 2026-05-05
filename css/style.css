@@ -41,11 +41,8 @@ html {
 }
 
 body {
-  color: var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(212, 196, 168, 0.08), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(107, 143, 113, 0.06), transparent 24%),
-    linear-gradient(180deg, var(--light) 0%, var(--light) 52%, var(--light) 100%);
+  color: #1F2A24;
+  background: #F7F3EC;
   line-height: 1.7;
 }
 
@@ -491,9 +488,9 @@ img {
   bottom: 0;
   background: linear-gradient(
     135deg,
-    rgba(31, 42, 36, 0.3) 0%,
-    rgba(31, 42, 36, 0.5) 50%,
-    rgba(31, 42, 36, 0.7) 100%
+    rgba(31, 42, 36, 0.05) 0%,
+    rgba(31, 42, 36, 0.08) 50%,
+    rgba(31, 42, 36, 0.12) 100%
   );
   pointer-events: none;
 }
@@ -575,16 +572,16 @@ ul {
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(14px);
-  background: rgba(212, 196, 168, 0.88);
+  background: #D4C4A8;
   border-bottom: 1px solid rgba(107, 143, 113, 0.14);
-  box-shadow: 0 10px 30px rgba(31, 42, 36, 0.18);
+  box-shadow: 0 10px 30px rgba(31, 42, 36, 0.08);
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .header.scrolled {
-  background: rgba(212, 196, 168, 0.96);
+  background: #D4C4A8;
   border-bottom-color: rgba(107, 143, 113, 0.28);
-  box-shadow: 0 16px 36px rgba(31, 42, 36, 0.24);
+  box-shadow: 0 16px 36px rgba(31, 42, 36, 0.12);
 }
 
 .navbar {
@@ -698,7 +695,7 @@ ul {
   display: flex;
   align-items: center;
   background:
-    linear-gradient(120deg, rgba(7, 41, 89, 0.9) 10%, rgba(7, 41, 89, 0.55) 55%, rgba(47, 133, 255, 0.35) 100%),
+    linear-gradient(120deg, rgba(212, 196, 168, 0.3) 10%, rgba(212, 196, 168, 0.2) 55%, rgba(107, 143, 113, 0.15) 100%),
     url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80") center / cover;
 }
 
@@ -727,7 +724,7 @@ ul {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(120deg, rgba(7, 41, 89, 0.84) 10%, rgba(7, 41, 89, 0.38) 58%, rgba(47, 133, 255, 0.2) 100%);
+    linear-gradient(120deg, rgba(212, 196, 168, 0.2) 10%, rgba(212, 196, 168, 0.15) 58%, rgba(107, 143, 113, 0.1) 100%);
 }
 
 .hero-content,
@@ -735,7 +732,7 @@ ul {
   position: relative;
   z-index: 1;
   width: min(1120px, calc(100% - 2rem));
-  color: var(--white);
+  color: #1F2A24;
   animation: riseUp 0.9s ease both;
 }
 
@@ -829,15 +826,15 @@ ul {
 }
 
 .btn-primary {
-  color: var(--white);
-  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  color: #FFFFFF;
+  background: #6B8F71;
   box-shadow: 0 18px 28px rgba(107, 143, 113, 0.24);
   border-radius: 12px;
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  background: #A3B18A;
   transform: translateY(-2px);
   box-shadow: 0 22px 32px rgba(107, 143, 113, 0.32);
 }
@@ -885,24 +882,29 @@ ul {
 }
 
 .about::before,
-.vision-mission::before,
 .news::before,
-.gallery::before,
 .contact-section::before {
   content: "";
   position: absolute;
   inset: 1.2rem -1rem;
   z-index: -1;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(212, 196, 168, 0.28);
   border-radius: 34px;
-  background: linear-gradient(180deg, var(--light), rgba(212, 196, 168, 0.12));
-  box-shadow: var(--shadow-card);
+  background: #F7F3EC;
+  box-shadow: 0 28px 70px rgba(31, 42, 36, 0.12);
 }
 
 /* Alternating section backgrounds */
 .vision-mission::before,
 .gallery::before {
-  background: linear-gradient(180deg, var(--primary), rgba(107, 143, 113, 0.08));
+  content: "";
+  position: absolute;
+  inset: 1.2rem -1rem;
+  z-index: -1;
+  border: 1px solid rgba(212, 196, 168, 0.28);
+  border-radius: 34px;
+  background: #D4C4A8;
+  box-shadow: 0 28px 70px rgba(31, 42, 36, 0.12);
 }
 
 .section-heading {
@@ -946,9 +948,9 @@ ul {
 .contact-card,
 .map-card,
 .cta-band {
-  background: var(--light);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
+  background: #F7F3EC;
+  border: 1px solid rgba(212, 196, 168, 0.28);
+  box-shadow: 0 18px 44px rgba(31, 42, 36, 0.10);
   border-radius: 12px;
   transition: all 0.3s ease;
 }
