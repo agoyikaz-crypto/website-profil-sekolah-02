@@ -1,3 +1,6 @@
+// REGISTER GSAP SCROLLTRIGGER PLUGIN
+gsap.registerPlugin(ScrollTrigger);
+
 // LENIS SMOOTH SCROLL
 const lenis = new Lenis();
 
