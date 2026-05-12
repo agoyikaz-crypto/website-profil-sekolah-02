@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PPDB Data - MTs Baitis Salmah</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(250, 250, 242, 0.6); /* Warm ivory glass */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(107, 143, 113, 0.1);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .sidebar-glass {
+            background: rgba(244, 244, 236, 0.95); /* Akaroa beige sidebar */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-right: 1px solid rgba(107, 143, 113, 0.1);
+        }
+        @media (min-width: 1024px) {
+            .sidebar-glass {
+                background: rgba(244, 244, 236, 0.6);
+            }
+        }
+        .navbar-glass {
+            background: rgba(244, 244, 236, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(107, 143, 113, 0.1);
+        }
+        .floating-shadow-xl {
+            box-shadow: 
+                0 4px 30px rgba(72, 103, 48, 0.05),
+                0 10px 40px rgba(107, 143, 113, 0.12);
+        }
+        .btn-hover-effect {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -6px rgba(72, 103, 48, 0.4);
+        }
+        body {
+            background-color: #fafaf2; /* Soft Akaroa beige */
+            background-image: radial-gradient(circle at 80% 20%, rgba(174, 209, 143, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 10% 80%, rgba(213, 197, 169, 0.25) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Responsive Sidebar Toggle */
+        #sidebar-toggle:checked ~ aside {
+            transform: translateX(0);
+        }
+        #sidebar-toggle:checked ~ .overlay {
+            display: block;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#486730", /* Darker Sage Green */
+                      "primary-container": "#87a96b", 
+                      "on-primary-container": "#213d0b", 
+                      "secondary": "#D4C4A8", /* Akaroa */
+                      "on-surface": "#1a1c18", /* High contrast dark green-black */
+                      "background": "#fafaf2", /* Ivory background */
+                      "surface": "#eeeee6", /* Warm container surface */
+                      "outline-variant": "rgba(72, 103, 48, 0.1)"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "16px",
+                      "2xl": "28px",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "columns": "12",
+                      "margin-desktop": "48px",
+                      "unit": "8px",
+                      "container-max-width": "1440px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Playfair Display"],
+                      "label-lg": ["Inter"],
+                      "headline-md": ["Playfair Display"],
+                      "display-lg": ["Playfair Display"],
+                      "display-md": ["Playfair Display"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-md": ["22px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex selection:bg-primary/20 overflow-x-hidden">
+<!-- Sidebar Control -->
+<input class="hidden peer" id="sidebar-toggle" type="checkbox"/>
+<label class="overlay fixed inset-0 bg-black/10 backdrop-blur-sm z-[45] hidden transition-opacity lg:hidden" for="sidebar-toggle"></label>
+<!-- SideNavBar -->
+<aside class="h-screen w-72 fixed left-0 top-0 sidebar-glass flex flex-col p-6 lg:p-8 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
+<div class="mb-12 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30 ring-1 ring-white/30">
+<span class="material-symbols-outlined text-[28px]" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface">Baitis Salmah</h1>
+<p class="text-label-sm font-label-sm text-on-surface/60">Admin Portal</p>
+</div>
+</div>
+<label class="lg:hidden p-2 text-on-surface/60 hover:bg-black/5 rounded-lg cursor-pointer" for="sidebar-toggle">
+<span class="material-symbols-outlined">close</span>
+</label>
+</div>
+<nav class="flex flex-col gap-2 flex-grow overflow-y-auto no-scrollbar">
+<a class="flex items-center gap-4 px-4 py-3.5 text-on-surface/70 hover:bg-white/50 transition-all duration-300 rounded-xl group" href="dashboard.html">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="dashboard">dashboard</span>
+<span class="text-label-lg font-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3.5 bg-primary text-white rounded-xl shadow-lg shadow-primary/20 transition-all duration-300" href="ppdb.html">
+<span class="material-symbols-outlined text-white" data-icon="person_add">person_add</span>
+<span class="text-label-lg font-label-lg">Data PPDB</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3.5 text-on-surface/70 hover:bg-white/50 transition-all duration-300 rounded-xl group" href="pembayaran.html">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="payments">payments</span>
+<span class="text-label-lg font-label-lg">Pembayaran</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3.5 text-on-surface/70 hover:bg-white/50 transition-all duration-300 rounded-xl group" href="statistik.html">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="leaderboard">leaderboard</span>
+<span class="text-label-lg font-label-lg">Statistik</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3.5 text-on-surface/70 hover:bg-white/50 transition-all duration-300 rounded-xl group" href="pengaturan.html">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="settings">settings</span>
+<span class="text-label-lg font-label-lg">Pengaturan</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-primary/10">
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/60 transition-all cursor-pointer glass-card border-none shadow-sm">
+<img alt="Administrator Profile" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2riyogfDgtt3EC0cr9k9nOhCfS0ZX59Q35RAPrgibWcsSRA6OurcVbSu5HkTWJ04K_gLDk11iEpAceQqNnVQ505kygBzHy3BtpcBYlUKpnBoFnOEEpOwzWI8Ief20rworPbu6c8PNqp0KmANtsjzVeotn2sqwLj9WsmR6Hpcv_z1wA230rNCCf-O_qL3nVAwNMnbS-HPPfkYp1Qk41KhhxBOXqBGkEghgO-4CwnCcZNgnzqgcZz2_PDSljqMUWTeFTn85GdqZZMoG"/>
+<div class="truncate">
+<p class="text-label-lg font-label-lg truncate text-on-surface">Administrator</p>
+<p class="text-[10px] font-bold text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span> ONLINE
+                    </p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-grow lg:pl-72 w-full min-w-0 flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full lg:w-[calc(100%-288px)] h-20 fixed top-0 z-40 navbar-glass px-4 md:px-12">
+<div class="flex items-center gap-4 lg:gap-12">
+<!-- Mobile Menu Toggle -->
+<label class="lg:hidden p-2 text-on-surface/60 hover:bg-white/60 rounded-full transition-all glass-card border-none cursor-pointer" for="sidebar-toggle">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</label>
+<h2 class="text-headline-sm font-headline-sm font-semibold whitespace-nowrap hidden sm:block text-on-surface">Data PPDB</h2>
+<div class="relative w-[180px] sm:w-[320px] md:w-[440px]">
+<span class="material-symbols-outlined absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-on-surface/40 text-sm sm:text-base" data-icon="search">search</span>
+<input id="ppdb-search" class="w-full bg-white/50 backdrop-blur-md border border-primary/10 rounded-full py-2 sm:py-2.5 pl-9 sm:pl-12 pr-4 text-xs sm:text-label-lg focus:ring-4 focus:ring-primary/10 focus:border-primary/20 transition-all outline-none placeholder-on-surface/40" placeholder="Search registrant..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-6">
+<button class="relative p-2 sm:p-2.5 text-on-surface/60 hover:text-primary hover:bg-white/60 rounded-full transition-all glass-card border-none">
+<span class="material-symbols-outlined text-sm sm:text-base" data-icon="notifications">notifications</span>
+<span class="absolute top-2 sm:top-2.5 right-2 sm:right-2.5 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full border border-white"></span>
+</button>
+<div class="hidden sm:block h-6 w-px bg-primary/10 mx-2"></div>
+<div class="flex items-center gap-2 py-1.5 px-3 sm:px-4 rounded-full glass-card border-none hover:bg-white/60 transition-all cursor-pointer">
+<span class="text-xs sm:text-label-lg font-label-lg hidden xs:block text-on-surface/80">Admin User</span>
+<span class="material-symbols-outlined text-on-surface/40 text-sm sm:text-base" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="mt-20 p-4 sm:p-8 lg:p-12 max-w-[1440px] mx-auto w-full min-h-[calc(100vh-80px)]">
+<!-- Action Bar -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-8 lg:mb-10">
+<div class="flex flex-col gap-4 sm:gap-6 w-full lg:w-auto">
+<h3 class="text-display-md font-display-md tracking-tight text-on-surface text-2xl sm:text-3xl lg:text-display-md">Registration Records</h3>
+<div class="flex flex-wrap items-center gap-4">
+<div class="flex glass-panel p-1 sm:p-1.5 rounded-xl sm:rounded-2xl shadow-sm overflow-x-auto no-scrollbar max-w-full">
+<button data-status-filter="all" class="px-4 sm:px-6 py-2 sm:py-2.5 bg-primary text-white rounded-lg sm:rounded-[14px] text-xs sm:text-label-lg font-label-lg shadow-lg shadow-primary/20 transition-all whitespace-nowrap">All Status</button>
+<button data-status-filter="pending" class="px-4 sm:px-6 py-2 sm:py-2.5 hover:bg-white/60 rounded-lg sm:rounded-[14px] text-xs sm:text-label-lg font-label-lg text-on-surface/60 transition-all whitespace-nowrap">Pending</button>
+<button data-status-filter="approved" class="px-4 sm:px-6 py-2 sm:py-2.5 hover:bg-white/60 rounded-lg sm:rounded-[14px] text-xs sm:text-label-lg font-label-lg text-on-surface/60 transition-all whitespace-nowrap">Approved</button>
+<button data-status-filter="rejected" class="px-4 sm:px-6 py-2 sm:py-2.5 hover:bg-white/60 rounded-lg sm:rounded-[14px] text-xs sm:text-label-lg font-label-lg text-on-surface/60 transition-all whitespace-nowrap">Rejected</button>
+</div>
+<button class="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 glass-panel rounded-xl sm:rounded-2xl text-xs sm:text-label-lg font-label-lg hover:bg-white/80 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px] text-primary" data-icon="calendar_today">calendar_today</span>
+                            May 2024
+                        </button>
+</div>
+</div>
+<button class="btn-hover-effect flex items-center justify-center gap-3 bg-primary text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-label-lg font-bold shadow-2xl shadow-primary/20 ring-1 ring-white/20 w-full sm:w-auto" onclick="ppdbManager.showCreateStudentModal()">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                    Add New Student
+                </button>
+</div>
+<!-- Debug Info (only shows when debug=true) -->
+<div id="debug-info" class="hidden"></div>
+<!-- Data Table Card -->
+<div class="glass-panel rounded-2xl floating-shadow-xl overflow-hidden border border-primary/10">
+<!-- Loading State -->
+<div id="ppdb-loading" class="hidden p-12 text-center">
+  <div class="flex flex-col items-center gap-4">
+    <div class="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+    <div class="text-on-surface/60">Loading PPDB data...</div>
+  </div>
+</div>
+<!-- Error State -->
+<div id="ppdb-error" class="hidden p-6 bg-error/10 border border-error/20 rounded-xl mb-4">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-error">error</span>
+    <span class="text-error font-medium"></span>
+  </div>
+</div>
+<!-- Responsive Table Wrapper -->
+<div id="ppdb-table" class="overflow-x-auto no-scrollbar">
+<table class="w-full text-left border-collapse min-w-[700px] sm:min-w-0">
+<thead>
+<tr class="border-b border-primary/10 bg-white/20">
+<th class="px-6 sm:px-10 py-5 sm:py-6 text-[10px] sm:text-label-sm font-bold text-on-surface/50 uppercase tracking-widest">Registrant Name</th>
+<th class="px-4 sm:px-8 py-5 sm:py-6 text-[10px] sm:text-label-sm font-bold text-on-surface/50 uppercase tracking-widest">Date Registered</th>
+<th class="px-4 sm:px-8 py-5 sm:py-6 text-[10px] sm:text-label-sm font-bold text-on-surface/50 uppercase tracking-widest text-center sm:text-left">Status</th>
+<th class="px-6 sm:px-10 py-5 sm:py-6 text-[10px] sm:text-label-sm font-bold text-on-surface/50 uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody id="ppdb-table-body">
+<!-- Table content will be dynamically inserted here -->
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer -->
+<div class="px-6 sm:px-10 py-5 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/20 border-t border-primary/10">
+<p class="text-[10px] sm:text-label-sm font-medium text-on-surface/50">Data loaded dynamically from Google Sheets</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="flex flex-col sm:flex-row justify-between items-center py-8 sm:py-10 px-6 sm:px-12 w-full mt-auto bg-transparent border-t border-primary/10 gap-6">
+<div class="flex items-center gap-3">
+<span class="text-[12px] sm:text-label-lg font-bold text-on-surface/80">MTs Baitis Salmah</span>
+<span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-primary/20"></span>
+<span class="text-xs sm:text-body-md font-medium text-on-surface/40">© 2024 Academic Portal.</span>
+</div>
+<div class="flex flex-wrap justify-center gap-4 sm:gap-8">
+<a class="text-[10px] sm:text-label-sm font-semibold text-on-surface/40 hover:text-primary transition-colors" href="#">Support</a>
+<a class="text-[10px] sm:text-label-sm font-semibold text-on-surface/40 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-[10px] sm:text-label-sm font-semibold text-on-surface/40 hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</footer>
+<!-- JavaScript Modules -->
+<script src="js/api-service.js?v=2"></script>
+<script src="js/ppdb-manager.js?v=2"></script>
+</body>
+</html>

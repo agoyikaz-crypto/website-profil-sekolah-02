@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Integration Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Admin Dashboard Integration Test</h1>
+        
+        <!-- Test Results -->
+        <div id="test-results" class="space-y-4 mb-8"></div>
+        
+        <!-- Test Controls -->
+        <div class="bg-white rounded-lg shadow p-6 space-y-4">
+            <h2 class="text-xl font-semibold mb-4">Test Controls</h2>
+            
+            <button onclick="testAPIConnection()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Test API Connection
+            </button>
+            
+            <button onclick="testPPDBFetch()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                Test PPDB Data Fetch
+            </button>
+            
+            <button onclick="testPaymentFetch()" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                Test Payment Data Fetch
+            </button>
+            
+            <button onclick="testPPDBStats()" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                Test PPDB Statistics
+            </button>
+            
+            <button onclick="clearResults()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                Clear Results
+            </button>
+        </div>
+        
+        <!-- Data Display -->
+        <div id="data-display" class="mt-8 bg-white rounded-lg shadow p-6 hidden">
+            <h2 class="text-xl font-semibold mb-4">Data Response</h2>
+            <pre id="data-content" class="bg-gray-100 p-4 rounded overflow-auto text-sm"></pre>
+        </div>
+    </div>
+
+    <!-- Include API Service -->
+    <script src="js/api-service.js"></script>
+    
+    <script>
+        function addResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            
+            const colors = {
+                'success': 'bg-green-100 border-green-400 text-green-700',
+                'error': 'bg-red-100 border-red-400 text-red-700',
+                'info': 'bg-blue-100 border-blue-400 text-blue-700',
+                'warning': 'bg-yellow-100 border-yellow-400 text-yellow-700'
+            };
+            
+            resultDiv.className = `border-l-4 p-4 ${colors[type]}`;
+            resultDiv.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined">
+                        ${type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info'}
+                    </span>
+                    <span>${new Date().toLocaleTimeString()}: ${message}</span>
+                </div>
+            `;
+            
+            resultsDiv.appendChild(resultDiv);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        function showData(data) {
+            const displayDiv = document.getElementById('data-display');
+            const contentDiv = document.getElementById('data-content');
+            
+            displayDiv.classList.remove('hidden');
+            contentDiv.textContent = JSON.stringify(data, null, 2);
+        }
+
+        function clearResults() {
+            document.getElementById('test-results').innerHTML = '';
+            document.getElementById('data-display').classList.add('hidden');
+        }
+
+        async function testAPIConnection() {
+            try {
+                addResult('Testing API connection...', 'info');
+                
+                // Test with a simple GET request
+                const response = await window.adminAPI.request({ formType: 'ppdb' }, 'GET');
+                
+                addResult('✓ API connection successful!', 'success');
+                showData(response);
+                
+            } catch (error) {
+                addResult(`✗ API connection failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testPPDBFetch() {
+            try {
+                addResult('Fetching PPDB data...', 'info');
+                
+                const response = await window.adminAPI.getPPDBData({ limit: 5 });
+                
+                addResult(`✓ PPDB data fetched successfully! Found ${response.count} records.`, 'success');
+                showData(response);
+                
+            } catch (error) {
+                addResult(`✗ PPDB fetch failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testPaymentFetch() {
+            try {
+                addResult('Fetching payment data...', 'info');
+                
+                const response = await window.adminAPI.getPaymentData({ limit: 5 });
+                
+                addResult(`✓ Payment data fetched successfully! Found ${response.count} records.`, 'success');
+                showData(response);
+                
+            } catch (error) {
+                addResult(`✗ Payment fetch failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testPPDBStats() {
+            try {
+                addResult('Calculating PPDB statistics...', 'info');
+                
+                const stats = await window.adminAPI.getPPDBStats();
+                
+                addResult(`✓ PPDB stats calculated! Total: ${stats.total}, Pending: ${stats.pending}, Approved: ${stats.approved}`, 'success');
+                showData(stats);
+                
+            } catch (error) {
+                addResult(`✗ PPDB stats calculation failed: ${error.message}`, 'error');
+            }
+        }
+
+        // Auto-run connection test on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            addResult('Integration test page loaded. Ready for testing.', 'info');
+        });
+    </script>
+</body>
+</html>

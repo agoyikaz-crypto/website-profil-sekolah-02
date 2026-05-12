@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Integration Test - PPDB System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .test-section {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .success { border-color: #10b981; background-color: #f0fdf4; }
+        .error { border-color: #ef4444; background-color: #fef2f2; }
+        .warning { border-color: #f59e0b; background-color: #fffbeb; }
+        .info { border-color: #3b82f6; background-color: #eff6ff; }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">🧪 Complete Integration Test - PPDB System</h1>
+        
+        <!-- Test Results -->
+        <div id="test-results" class="space-y-4 mb-8"></div>
+        
+        <!-- Test Controls -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- PPDB Form Test -->
+            <div class="test-section">
+                <h2 class="text-xl font-semibold mb-4">📝 PPDB Form Test</h2>
+                <div class="space-y-3">
+                    <button onclick="testPPDBForm()" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                        Test PPDB Form Submission
+                    </button>
+                    <button onclick="testPPDBFormWithRealData()" class="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Test with Real Sample Data
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Admin Dashboard Test -->
+            <div class="test-section">
+                <h2 class="text-xl font-semibold mb-4">📊 Admin Dashboard Test</h2>
+                <div class="space-y-3">
+                    <button onclick="testAdminDataFetch()" class="w-full bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                        Test Admin Data Fetch
+                    </button>
+                    <button onclick="testAdminStats()" class="w-full bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                        Test Admin Statistics
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Display -->
+        <div id="data-display" class="bg-white rounded-lg shadow p-6 hidden">
+            <h2 class="text-xl font-semibold mb-4">📋 Test Results</h2>
+            <div id="data-content" class="space-y-4"></div>
+        </div>
+        
+        <!-- Live Status -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold mb-4">🔍 Live Status</h2>
+            <div id="live-status" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="text-center p-4 bg-gray-100 rounded">
+                    <div class="text-2xl font-bold" id="status-form">❓</div>
+                    <div class="text-sm text-gray-600">PPDB Form</div>
+                </div>
+                <div class="text-center p-4 bg-gray-100 rounded">
+                    <div class="text-2xl font-bold" id="status-admin">❓</div>
+                    <div class="text-sm text-gray-600">Admin Dashboard</div>
+                </div>
+                <div class="text-center p-4 bg-gray-100 rounded">
+                    <div class="text-2xl font-bold" id="status-endpoint">❓</div>
+                    <div class="text-sm text-gray-600">API Endpoint</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include API Service -->
+    <script src="js/api-service.js"></script>
+    
+    <script>
+        const correctEndpoint = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
+        
+        function addResult(message, type = 'info', details = null) {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            
+            const colors = {
+                'success': 'success',
+                'error': 'error', 
+                'warning': 'warning',
+                'info': 'info'
+            };
+            
+            const icons = {
+                'success': '✅',
+                'error': '❌',
+                'warning': '⚠️',
+                'info': 'ℹ️'
+            };
+            
+            let html = `
+                <div class="test-section ${colors[type]}">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-lg">${icons[type]}</span>
+                        <span class="font-semibold">${new Date().toLocaleTimeString('id-ID')}: ${message}</span>
+                    </div>
+            `;
+            
+            if (details) {
+                html += `<pre class="bg-white bg-opacity-50 p-3 rounded text-xs overflow-auto">${JSON.stringify(details, null, 2)}</pre>`;
+            }
+            
+            html += '</div>';
+            resultDiv.innerHTML = html;
+            
+            resultsDiv.appendChild(resultDiv);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        function updateStatus(form, admin, endpoint) {
+            document.getElementById('status-form').textContent = form;
+            document.getElementById('status-admin').textContent = admin;
+            document.getElementById('status-endpoint').textContent = endpoint;
+        }
+
+        function showData(title, data) {
+            const displayDiv = document.getElementById('data-display');
+            const contentDiv = document.getElementById('data-content');
+            
+            displayDiv.classList.remove('hidden');
+            
+            const dataHtml = `
+                <div class="test-section info">
+                    <h3 class="font-semibold mb-2">${title}</h3>
+                    <pre class="bg-gray-100 p-4 rounded text-sm overflow-auto">${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            `;
+            
+            contentDiv.innerHTML = dataHtml;
+        }
+
+        async function testPPDBForm() {
+            try {
+                addResult('Testing PPDB form connection...', 'info');
+                updateStatus('🔄', '❓', '❓');
+                
+                // Test minimal data
+                const testData = new FormData();
+                testData.append('formType', 'ppdb');
+                testData.append('test', 'true');
+                
+                const response = await fetch(correctEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams(testData)
+                });
+                
+                const text = await response.text();
+                let data;
+                
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Response is not valid JSON: ' + text);
+                }
+                
+                if (data.status === 'success') {
+                    addResult('✅ PPDB form connection successful!', 'success', data);
+                    updateStatus('✅', '❓', '✅');
+                } else {
+                    addResult('❌ PPDB form returned error: ' + data.message, 'error', data);
+                    updateStatus('❌', '❓', '❌');
+                }
+                
+            } catch (error) {
+                addResult('❌ PPDB form test failed: ' + error.message, 'error');
+                updateStatus('❌', '❓', '❌');
+            }
+        }
+
+        async function testPPDBFormWithRealData() {
+            try {
+                addResult('Testing PPDB form with real sample data...', 'info');
+                
+                const testData = new FormData();
+                testData.append('formType', 'ppdb');
+                testData.append('Nama Lengkap', 'Test Student Integration');
+                testData.append('NISN', '1234567890');
+                testData.append('Tempat Lahir', 'Test City');
+                testData.append('Tanggal Lahir', '2005-01-01');
+                testData.append('Jenis Kelamin', 'Laki-laki');
+                testData.append('No HP', '081234567890');
+                testData.append('Email', 'test@example.com');
+                testData.append('Jurusan', 'IPA');
+                testData.append('Alamat', 'Test Address for Integration');
+                testData.append('Waktu pendaftaran', new Date().toLocaleString());
+                
+                const response = await fetch(correctEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams(testData)
+                });
+                
+                const text = await response.text();
+                let data;
+                
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    throw new Error('Response is not valid JSON: ' + text);
+                }
+                
+                if (data.status === 'success') {
+                    addResult('✅ PPDB form with real data successful!', 'success', data);
+                    updateStatus('✅', '❓', '✅');
+                    showData('PPDB Form Submission Result', data);
+                } else {
+                    addResult('❌ PPDB form with real data failed: ' + data.message, 'error', data);
+                    updateStatus('❌', '❓', '❌');
+                }
+                
+            } catch (error) {
+                addResult('❌ PPDB form with real data failed: ' + error.message, 'error');
+                updateStatus('❌', '❓', '❌');
+            }
+        }
+
+        async function testAdminDataFetch() {
+            try {
+                addResult('Testing admin dashboard data fetch...', 'info');
+                updateStatus('✅', '🔄', '✅');
+                
+                // Initialize API service if not already done
+                if (!window.adminAPI) {
+                    addResult('❌ Admin API service not loaded', 'error');
+                    return;
+                }
+                
+                const response = await window.adminAPI.getPPDBData({ limit: 5 });
+                
+                addResult(`✅ Admin data fetch successful! Found ${response.count} records`, 'success', response);
+                updateStatus('✅', '✅', '✅');
+                showData('Admin Dashboard Data Fetch Result', response);
+                
+            } catch (error) {
+                addResult('❌ Admin data fetch failed: ' + error.message, 'error');
+                updateStatus('✅', '❌', '❌');
+            }
+        }
+
+        async function testAdminStats() {
+            try {
+                addResult('Testing admin statistics calculation...', 'info');
+                updateStatus('✅', '🔄', '✅');
+                
+                if (!window.adminAPI) {
+                    addResult('❌ Admin API service not loaded', 'error');
+                    return;
+                }
+                
+                const stats = await window.adminAPI.getPPDBStats();
+                
+                addResult(`✅ Admin stats successful! Total: ${stats.total}, Pending: ${stats.pending}`, 'success', stats);
+                updateStatus('✅', '✅', '✅');
+                showData('Admin Statistics Result', stats);
+                
+            } catch (error) {
+                addResult('❌ Admin stats failed: ' + error.message, 'error');
+                updateStatus('✅', '❌', '❌');
+            }
+        }
+
+        // Auto-run endpoint check on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            addResult('🚀 Complete integration test page loaded', 'info');
+            addResult(`🔗 Using endpoint: ${correctEndpoint}`, 'info');
+            updateStatus('❓', '❓', '❓');
+            
+            // Check if API service is loaded
+            setTimeout(() => {
+                if (window.adminAPI) {
+                    addResult('✅ Admin API service loaded successfully', 'success');
+                    updateStatus('❓', '✅', '✅');
+                } else {
+                    addResult('❌ Admin API service failed to load', 'error');
+                    updateStatus('❓', '❌', '❌');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pengaturan - MTs Baitis Salmah Admin Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#1a1c18",
+                      "on-secondary-fixed-variant": "#504530",
+                      "surface-variant": "#e3e3db",
+                      "surface-bright": "#fafaf2",
+                      "primary-fixed": "#c9eea9",
+                      "inverse-on-surface": "#f1f1e9",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#213d0b",
+                      "secondary-fixed": "#f1e0c3",
+                      "on-secondary-fixed": "#231a08",
+                      "inverse-surface": "#2f312c",
+                      "surface-container-low": "#f4f4ec",
+                      "primary-container": "#87a96b",
+                      "outline-variant": "#c4c8ba",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#0b2013",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary": "#695d46",
+                      "on-tertiary-fixed-variant": "#364c3c",
+                      "tertiary": "#4d6453",
+                      "surface-container-highest": "#e3e3db",
+                      "surface-container": "#eeeee6",
+                      "on-primary-fixed": "#0b2000",
+                      "primary-fixed-dim": "#aed18f",
+                      "inverse-primary": "#aed18f",
+                      "on-tertiary-container": "#263b2c",
+                      "on-surface": "#1a1c18",
+                      "surface": "#fafaf2",
+                      "secondary-fixed-dim": "#d5c5a9",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#314e1b",
+                      "secondary-container": "#efdec1",
+                      "surface-dim": "#dadad3",
+                      "on-error-container": "#93000a",
+                      "error-container": "#ffdad6",
+                      "background": "#f1f0e8", /* Soft Akaroa beige main background */
+                      "on-secondary-container": "#6d614a",
+                      "outline": "#74796c",
+                      "tertiary-fixed-dim": "#b4cdb8",
+                      "tertiary-fixed": "#d0e9d4",
+                      "tertiary-container": "#8da592",
+                      "surface-container-high": "#e8e9e1",
+                      "surface-tint": "#486730",
+                      "on-surface-variant": "#43483d",
+                      "on-primary": "#ffffff",
+                      "primary": "#486730",
+                      "error": "#ba1a1a",
+                      "ivory-surface": "#fafaf2" /* Warm ivory for containers */
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "2xl": "1.5rem",
+                      "3xl": "2rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-md": ["Playfair Display"],
+                      "headline-lg": ["Playfair Display"],
+                      "label-lg": ["Inter"],
+                      "display-md": ["Playfair Display"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Playfair Display"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-md": ["22px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "headline-lg": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-lg": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(250, 250, 242, 0.7); /* Warm ivory glass effect */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(72, 103, 48, 0.15); /* Primary color low opacity */
+            box-shadow: 0 10px 30px rgba(27, 48, 34, 0.04);
+        }
+        .form-input {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(116, 121, 108, 0.25);
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #486730; /* Dark green focus */
+            box-shadow: 0 0 0 4px rgba(72, 103, 48, 0.08);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        #mobile-sidebar-overlay {
+            display: none;
+        }
+        #mobile-sidebar-overlay.active {
+            display: block;
+        }
+        @media (max-width: 1024px) {
+            aside {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+            aside.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Mobile Sidebar Overlay -->
+<div class="fixed inset-0 bg-black/50 z-[45] backdrop-blur-sm lg:hidden" id="mobile-sidebar-overlay" onclick="toggleSidebar()"></div>
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen p-6 border-r border-outline-variant/20 w-72 fixed left-0 top-0 bg-ivory-surface shadow-sm z-50 overflow-y-auto lg:translate-x-0" id="main-sidebar">
+<div class="flex justify-end lg:hidden mb-4">
+<button class="p-2 text-on-surface-variant" onclick="toggleSidebar()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex flex-col items-center mb-10">
+<div class="w-16 h-16 rounded-2xl bg-primary-container flex items-center justify-center mb-4 shadow-sm">
+<span class="material-symbols-outlined text-on-primary-container text-4xl">school</span>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-center text-primary">MTs Baitis Salmah</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant opacity-70">Admin Portal</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:text-primary transition-all duration-300 rounded-xl hover:bg-surface-container-high" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-lg font-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:text-primary transition-all duration-300 rounded-xl hover:bg-surface-container-high" href="ppdb.html">
+<span class="material-symbols-outlined">person_add</span>
+<span class="text-label-lg font-label-lg">Data PPDB</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:text-primary transition-all duration-300 rounded-xl hover:bg-surface-container-high" href="pembayaran.html">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-lg font-label-lg">Pembayaran</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:text-primary transition-all duration-300 rounded-xl hover:bg-surface-container-high" href="statistik.html">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-label-lg font-label-lg">Statistik</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-3 bg-primary text-on-primary rounded-xl font-bold shadow-md" href="pengaturan.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-lg font-label-lg">Pengaturan</span>
+</a>
+</nav>
+<div class="mt-auto pt-6">
+<button class="w-full flex items-center gap-4 px-6 py-3 text-error hover:bg-error-container/10 rounded-xl transition-all">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-lg font-label-lg">Keluar</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full lg:pl-80 px-4 md:px-8 lg:pr-12 h-20 fixed top-0 z-40 bg-ivory-surface/90 backdrop-blur-md border-b border-outline-variant/20 shadow-sm">
+<div class="flex items-center gap-4">
+<button class="lg:hidden p-2 -ml-2 text-on-surface-variant" onclick="toggleSidebar()">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-2 md:gap-4">
+<h2 class="text-label-lg md:text-headline-sm font-headline-sm font-semibold text-primary whitespace-nowrap">Admin Dashboard</h2>
+<div class="hidden sm:block h-6 w-[1px] bg-outline-variant/30 mx-2"></div>
+<span class="hidden sm:inline text-label-lg font-label-lg text-on-surface-variant">Pengaturan</span>
+</div>
+</div>
+<div class="flex items-center gap-2 md:gap-6">
+<div class="relative hidden md:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant opacity-60">search</span>
+<input class="bg-surface-container-low/50 border-none rounded-full py-2 pl-10 pr-4 text-body-md w-48 lg:w-64 focus:ring-2 focus:ring-primary/20" placeholder="Cari pengaturan..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<div class="flex items-center gap-3 md:pl-4 md:border-l md:border-outline-variant/30">
+<div class="text-right hidden sm:block">
+<p class="text-label-lg font-label-lg text-primary">Admin Utama</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Akses Penuh</p>
+</div>
+<img alt="Administrator Profile" class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCijMQA_-ZMpTuGvoXp3rGuoPjtNpTvPkGq45NxTe917PKUo3omerEksr9MkTIULrJ1r_uiNqoiCzulwJVW0yHNIPcXCsK2wSWRuNyr21dCvW2ZOTx178av7YgB87KPFrOQsLaquKM-Oy1LfdRQRU6Xr5H5kF7V9NTryr3J8SENur9yztNXDVZYnhJM7Bq723OojQQMHgYdGjRiOcYP7yatZzzquGisqOQrmYHQmQ-1t24DBzzc69Kx59r8gJAWzzwYntAv6BJ9zeBO"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="lg:pl-80 pt-24 px-4 md:px-8 lg:pr-12 pb-12 min-h-screen">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="mb-8 md:mb-10">
+<h3 class="text-display-md font-display-md text-primary mb-2 text-2xl md:text-4xl lg:text-5xl">Pengaturan</h3>
+<p class="text-body-md md:text-body-lg text-on-surface-variant max-w-2xl">Kelola konfigurasi institusi MTs Baitis Salmah, preferensi akun, dan pengaturan sistem dalam satu pusat kendali.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-4 md:gap-6">
+<!-- School Profile Section -->
+<section class="col-span-12 lg:col-span-8 glass-panel rounded-3xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 md:mb-8">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">account_balance</span>
+<h4 class="text-headline-md font-headline-md text-primary text-xl md:text-2xl">Profil Institusi</h4>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Nama Sekolah</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="text" value="MTs Baitis Salmah"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Akreditasi</label>
+<select class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none">
+<option selected="">Terakreditasi A</option>
+<option>Terakreditasi B</option>
+<option>Dalam Proses</option>
+</select>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Nama Yayasan</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="text" value="Yayasan Baitis Salmah Sejahtera"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Visi Institusi</label>
+<textarea class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" rows="3">Membentuk generasi Qur'ani yang berakhlak mulia, cerdas, dan berwawasan teknologi global.</textarea>
+</div>
+</div>
+</section>
+<!-- School Logo Section -->
+<section class="col-span-12 lg:col-span-4 glass-panel rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-center border-dashed border-2 border-primary/20 order-first lg:order-none">
+<div class="relative mb-6">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-primary-container flex items-center justify-center shadow-md overflow-hidden">
+<span class="material-symbols-outlined text-on-primary-container text-4xl md:text-6xl">school</span>
+</div>
+<button class="absolute -bottom-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<h5 class="text-headline-sm font-headline-sm mb-2 text-primary text-lg md:text-xl">Logo Institusi</h5>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-6 px-4">Gunakan format PNG atau JPG transparan dengan resolusi minimal 512x512px.</p>
+<button class="px-6 py-2 bg-ivory-surface border border-primary text-primary rounded-full font-label-lg hover:bg-primary hover:text-on-primary transition-all duration-300 w-full sm:w-auto">Unggah Baru</button>
+</section>
+<!-- Contact & Social Section -->
+<section class="col-span-12 lg:col-span-7 glass-panel rounded-3xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 md:mb-8">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">contact_mail</span>
+<h4 class="text-headline-md font-headline-md text-primary text-xl md:text-2xl">Kontak &amp; Sosial</h4>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Email Resmi</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="email" value="info@baitissalmah.sch.id"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Nomor Telepon</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="text" value="+62 21 745 6789"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Alamat Lengkap</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="text" value="Jl. Baitis Salmah No. 12, Ciputat, Tangerang Selatan"/>
+</div>
+<div class="pt-4 border-t border-outline-variant/20 grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-sm">alternate_email</span>
+<input class="form-input w-full rounded-xl pl-10 pr-4 py-2 text-label-lg focus:outline-none" placeholder="Instagram" type="text"/>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-sm">social_leaderboard</span>
+<input class="form-input w-full rounded-xl pl-10 pr-4 py-2 text-label-lg focus:outline-none" placeholder="Facebook" type="text"/>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-sm">share</span>
+<input class="form-input w-full rounded-xl pl-10 pr-4 py-2 text-label-lg focus:outline-none" placeholder="Twitter/X" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Notification Settings Section -->
+<section class="col-span-12 lg:col-span-5 glass-panel rounded-3xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 md:mb-8">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">notifications_active</span>
+<h4 class="text-headline-md font-headline-md text-primary text-xl md:text-2xl">Notifikasi</h4>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-ivory-surface/40 rounded-2xl border border-outline-variant/10">
+<div class="flex-1 pr-4">
+<p class="font-label-lg text-primary font-bold">Pemberitahuan PPDB</p>
+<p class="text-label-sm text-on-surface-variant">Email otomatis saat pendaftar baru masuk</p>
+</div>
+<button class="w-12 h-6 bg-primary-container rounded-full relative shadow-inner shrink-0 cursor-pointer focus:outline-none">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-ivory-surface/40 rounded-2xl border border-outline-variant/10">
+<div class="flex-1 pr-4">
+<p class="font-label-lg text-primary font-bold">Laporan Keuangan</p>
+<p class="text-label-sm text-on-surface-variant">Ringkasan pembayaran via dashboard</p>
+</div>
+<button class="w-12 h-6 bg-primary-container rounded-full relative shadow-inner shrink-0 cursor-pointer focus:outline-none">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-ivory-surface/40 rounded-2xl border border-outline-variant/10 opacity-70">
+<div class="flex-1 pr-4">
+<p class="font-label-lg text-primary font-bold">Update Keamanan</p>
+<p class="text-label-sm text-on-surface-variant">Wajib diaktifkan untuk admin utama</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative shrink-0">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Admin Account Settings Section -->
+<section class="col-span-12 lg:col-span-6 glass-panel rounded-3xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 md:mb-8">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">manage_accounts</span>
+<h4 class="text-headline-md font-headline-md text-primary text-xl md:text-2xl">Akun Admin</h4>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
+<img class="w-20 h-20 rounded-2xl object-cover border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqtL1N5Zf6bJr8f5G21HcXUZLSPIpwz85UUmUefP8Bhairnf3gt2v37oVA5OjLDFNluqkelUW6SFhO17IcRGLQbZsc27CcZ6luOQvQ0s6c6vdnrWtMoqFlR40Do7DkRfwjkANl_n3mAhtzjznmf7E8XYAnYf9KWaaRRe6TMJwNaPgHmO8I45hjfIBVycW262QD4g_7tqpQ7HWQLzvvav_qF8vpKJGKyHPikedE1ENlaHMGBYqNavhJBbqfOhgeFeNifm-WxHLO8Goq"/>
+<div class="text-center sm:text-left">
+<button class="px-4 py-2 bg-primary-container/20 text-primary font-semibold text-label-sm rounded-lg hover:bg-primary-container/40 transition-colors">Ganti Foto Profil</button>
+<p class="text-label-sm text-on-surface-variant mt-2">Max 2MB (JPG/PNG).</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Nama Lengkap</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="text" value="Ahmad Hidayat, M.Pd"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Email Personal</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="email" value="ahmad.hidayat@gmail.com"/>
+</div>
+</div>
+</section>
+<!-- Change Password Section -->
+<section class="col-span-12 lg:col-span-6 glass-panel rounded-3xl p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6 md:mb-8">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">lock_reset</span>
+<h4 class="text-headline-md font-headline-md text-primary text-xl md:text-2xl">Keamanan</h4>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Password Saat Ini</label>
+<div class="relative">
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" placeholder="••••••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant cursor-pointer">visibility_off</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Password Baru</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-primary font-semibold ml-1">Konfirmasi</label>
+<input class="form-input w-full rounded-xl px-4 py-3 text-body-md focus:outline-none" type="password"/>
+</div>
+</div>
+<div class="pt-2">
+<div class="flex items-center gap-2 mb-2">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-outline-variant/30 rounded-full"></div>
+<div class="h-1.5 flex-1 bg-outline-variant/30 rounded-full"></div>
+</div>
+<p class="text-label-sm text-on-surface-variant italic">Gunakan kombinasi simbol, angka, dan kapital.</p>
+</div>
+</div>
+</section>
+<!-- Action Bar -->
+<div class="col-span-12 flex flex-col sm:flex-row justify-end gap-3 md:gap-4 mt-6">
+<button class="px-8 py-3 rounded-2xl border border-outline-variant/50 text-primary hover:bg-surface-container transition-all font-label-lg order-2 sm:order-1 font-semibold">Batalkan Perubahan</button>
+<button class="px-8 py-3 rounded-2xl bg-primary text-on-primary shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all font-label-lg flex items-center justify-center gap-2 order-1 sm:order-2 font-bold">
+<span class="material-symbols-outlined text-lg">save</span>
+                    Simpan Semua
+                </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="flex flex-col sm:flex-row justify-between items-center py-6 lg:pl-80 px-4 md:px-12 w-full mt-auto bg-ivory-surface border-t border-outline-variant/20 gap-4">
+<p class="text-label-sm md:text-body-md text-on-surface-variant text-center sm:text-left">© 2024 MTs Baitis Salmah. All Rights Reserved.</p>
+<div class="flex gap-4 md:gap-8 flex-wrap justify-center">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Support</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Terms of Service</a>
+</div>
+</footer>
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('main-sidebar');
+        const overlay = document.getElementById('mobile-sidebar-overlay');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        if (sidebar.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+</script>
+</body></html>

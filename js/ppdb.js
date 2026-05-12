@@ -1,4 +1,4 @@
-const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec?v=2";
+const PPDB_ENDPOINT = "https://script.google.com/macros/s/AKfycbw18EI-H034EnBoQD2swZZK1b5oJ2GAfRJuM43kKqwG_Cv9mmoogW9ftRqF4BNqZ2EjIw/exec";
 const PPDB_BACKUP_KEY = "ppdbDataBackup";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,9 +10,10 @@ async function submitToServer(formData) {
   const params = new URLSearchParams(formData);
   
   // Debug logging
-  console.log('Endpoint:', PPDB_ENDPOINT);
-  console.log('Sending to Sheets:', Object.fromEntries(formData));
-  console.log('URLSearchParams string:', params.toString());
+  console.log('🚀 Submitting PPDB Form');
+  console.log('📤 Endpoint:', PPDB_ENDPOINT);
+  console.log('📋 Sending to Sheets:', Object.fromEntries(formData));
+  console.log('🔗 URLSearchParams string:', params.toString());
 
   try {
     const res = await fetch(PPDB_ENDPOINT, {
@@ -24,7 +25,7 @@ async function submitToServer(formData) {
     });
 
     const text = await res.text();
-    console.log("RAW RESPONSE:", text);
+    console.log("📥 RAW RESPONSE:", text);
     
     // Hard error detection for old backend
     if (text.includes("Sheet tidak ditemukan")) {
@@ -34,21 +35,22 @@ async function submitToServer(formData) {
     let data;
     try {
       data = JSON.parse(text);
+      console.log("✅ PARSED JSON:", data);
     } catch (err) {
       throw new Error("Response is NOT JSON: " + text);
     }
     
-    console.log("PARSED JSON:", data);
-    
     // Check if server returned an error
     if (data.status === 'error') {
+      console.error("❌ Server Error:", data.message);
       throw new Error(data.message || 'Server returned an error');
     }
     
+    console.log("🎉 PPDB Submission Successful!");
     return data;
   } catch (error) {
-    console.error('Fetch error:', error);
-    console.error('Error details:', error.message);
+    console.error('💥 PPDB Submission Error:', error);
+    console.error('💥 Error Details:', error.message);
     throw error;
   }
 }
